@@ -16,13 +16,13 @@ body {
 /* HEADER */
 .header {
   text-align: center;
-  padding: 20px;
+  padding: 25px 15px;
 }
 
 .avatar {
-  width: 75px;
+  width: 80px;
   border-radius: 50%;
-  box-shadow: 0 0 20px rgba(0,255,255,0.4);
+  box-shadow: 0 0 25px rgba(0,255,255,0.5);
 }
 
 .title {
@@ -35,12 +35,18 @@ body {
   color: #9ca3af;
 }
 
-/* SHOP LIST */
+.status {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #22c55e;
+}
+
+/* SHOP */
 .shop {
   padding: 15px;
 }
 
-/* CARD */
+/* ITEM */
 .item {
   background: #111827;
   border-radius: 16px;
@@ -51,6 +57,7 @@ body {
   align-items: center;
   transition: 0.25s;
   border: 1px solid transparent;
+  position: relative;
 }
 
 .item:hover {
@@ -64,15 +71,22 @@ body {
 
 .item.active {
   border: 1px solid #3b82f6;
-  box-shadow: 0 0 20px rgba(59,130,246,0.4);
+  box-shadow: 0 0 25px rgba(59,130,246,0.5);
+}
+
+/* BEST BADGE */
+.badge {
+  position: absolute;
+  top: -8px;
+  right: 10px;
+  background: gold;
+  color: black;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 6px;
 }
 
 /* INFO */
-.info {
-  display: flex;
-  flex-direction: column;
-}
-
 .name {
   font-weight: 500;
 }
@@ -84,9 +98,9 @@ body {
 
 /* BUTTON */
 .buy {
-  padding: 6px 12px;
-  border-radius: 8px;
-  background: #2563eb;
+  padding: 7px 14px;
+  border-radius: 10px;
+  background: linear-gradient(45deg,#2563eb,#3b82f6);
   border: none;
   color: white;
   cursor: pointer;
@@ -94,7 +108,7 @@ body {
 }
 
 .buy:hover {
-  background: #3b82f6;
+  transform: scale(1.05);
 }
 
 .buy:active {
@@ -104,12 +118,6 @@ body {
 /* CONTACT */
 .contact {
   margin: 20px 15px;
-}
-
-.contact-title {
-  font-size: 13px;
-  color: #9ca3af;
-  margin-bottom: 10px;
 }
 
 .contact-box {
@@ -133,7 +141,6 @@ body {
 
 .contact-item img {
   width: 35px;
-  height: 35px;
   border-radius: 50%;
   margin-right: 10px;
 }
@@ -154,18 +161,17 @@ body {
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <img src="K.PNG" class="avatar">
   <div class="title">Proxy Premium Shop</div>
   <div class="sub">Dịch vụ ổn định • tốc độ cao</div>
+  <div class="status">● Online</div>
 </div>
 
-<!-- SHOP -->
 <div class="shop">
 
 <div class="item">
-  <div class="info">
+  <div>
     <div class="name">Proxy Premium 1 Ngày</div>
     <div class="price">30VND</div>
   </div>
@@ -173,7 +179,7 @@ body {
 </div>
 
 <div class="item">
-  <div class="info">
+  <div>
     <div class="name">Proxy Premium 7 Ngày</div>
     <div class="price">70VND</div>
   </div>
@@ -181,7 +187,8 @@ body {
 </div>
 
 <div class="item">
-  <div class="info">
+  <div class="badge">HOT</div>
+  <div>
     <div class="name">Proxy Premium 30 Ngày</div>
     <div class="price">150VND</div>
   </div>
@@ -190,12 +197,8 @@ body {
 
 </div>
 
-<!-- CONTACT -->
 <div class="contact">
-  <div class="contact-title">Liên hệ</div>
-
   <div class="contact-box">
-
     <div class="contact-item" onclick="openZalo()">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
       <div class="contact-text">Zalo: 84989288257</div>
@@ -205,11 +208,9 @@ body {
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
       <div class="contact-text">Discord Server</div>
     </div>
-
   </div>
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
 ⚠️ IB Zalo để được tư vấn trực tiếp
 </div>
@@ -221,13 +222,13 @@ function buy(btn){
   document.querySelectorAll('.item').forEach(i=>i.classList.remove('active'));
   item.classList.add('active');
 
-  btn.innerText = "Đang mở...";
+  btn.innerText = "Đang xử lý...";
   btn.style.background = "#16a34a";
 
   setTimeout(()=>{
     window.open("https://zalo.me/84989288257","_blank");
     btn.innerText = "Mua";
-    btn.style.background = "#2563eb";
+    btn.style.background = "linear-gradient(45deg,#2563eb,#3b82f6)";
   },400);
 }
 
