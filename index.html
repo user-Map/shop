@@ -9,8 +9,8 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont;
-  background: #0b0f19;
-  color: white;
+  background: #f3f4f6;
+  color: #111;
 }
 
 /* HEADER */
@@ -22,7 +22,7 @@ body {
 .avatar {
   width: 80px;
   border-radius: 50%;
-  box-shadow: 0 0 25px rgba(0,255,255,0.5);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .title {
@@ -32,11 +32,10 @@ body {
 
 .sub {
   font-size: 13px;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 .status {
-  margin-top: 5px;
   font-size: 12px;
   color: #22c55e;
 }
@@ -46,61 +45,48 @@ body {
   padding: 15px;
 }
 
-/* ITEM */
+/* CARD */
 .item {
-  background: #111827;
+  background: white;
   border-radius: 16px;
   padding: 15px;
   margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: 0.25s;
-  border: 1px solid transparent;
-  position: relative;
+  transition: 0.2s;
+  border: 1px solid #e5e7eb;
 }
 
 .item:hover {
-  background: #1f2937;
   transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
 .item:active {
-  transform: scale(0.96);
+  transform: scale(0.97);
 }
 
 .item.active {
-  border: 1px solid #3b82f6;
-  box-shadow: 0 0 25px rgba(59,130,246,0.5);
+  border: 1px solid #2563eb;
+  box-shadow: 0 0 10px rgba(37,99,235,0.3);
 }
 
-/* BEST BADGE */
-.badge {
-  position: absolute;
-  top: -8px;
-  right: 10px;
-  background: gold;
-  color: black;
-  font-size: 10px;
-  padding: 2px 6px;
-  border-radius: 6px;
-}
-
-/* INFO */
+/* TEXT */
 .name {
   font-weight: 500;
 }
 
 .price {
   font-size: 13px;
-  color: #9ca3af;
+  color: #6b7280;
 }
 
 /* BUTTON */
 .buy {
   padding: 7px 14px;
   border-radius: 10px;
-  background: linear-gradient(45deg,#2563eb,#3b82f6);
+  background: #2563eb;
   border: none;
   color: white;
   cursor: pointer;
@@ -108,7 +94,7 @@ body {
 }
 
 .buy:hover {
-  transform: scale(1.05);
+  background: #1d4ed8;
 }
 
 .buy:active {
@@ -121,9 +107,10 @@ body {
 }
 
 .contact-box {
-  background: #111827;
+  background: white;
   border-radius: 14px;
   padding: 10px;
+  border: 1px solid #e5e7eb;
 }
 
 .contact-item {
@@ -136,7 +123,7 @@ body {
 }
 
 .contact-item:hover {
-  background: #1f2937;
+  background: #f3f4f6;
 }
 
 .contact-item img {
@@ -145,16 +132,12 @@ body {
   margin-right: 10px;
 }
 
-.contact-text {
-  font-size: 14px;
-}
-
 /* FOOTER */
 .footer {
   text-align: center;
   font-size: 13px;
   padding: 15px;
-  color: #9ca3af;
+  color: #6b7280;
 }
 </style>
 </head>
@@ -164,7 +147,7 @@ body {
 <div class="header">
   <img src="K.PNG" class="avatar">
   <div class="title">Proxy Premium Shop</div>
-  <div class="sub">Dịch vụ ổn định • tốc độ cao</div>
+  <div class="sub">Dịch vụ FF • Aim </div>
   <div class="status">● Online</div>
 </div>
 
@@ -187,7 +170,6 @@ body {
 </div>
 
 <div class="item">
-  <div class="badge">HOT</div>
   <div>
     <div class="name">Proxy Premium 30 Ngày</div>
     <div class="price">150VND</div>
@@ -201,12 +183,12 @@ body {
   <div class="contact-box">
     <div class="contact-item" onclick="openZalo()">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
-      <div class="contact-text">Zalo: 84989288257</div>
+      <div>Zalo: 84989288257</div>
     </div>
 
     <div class="contact-item" onclick="openDiscord()">
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
-      <div class="contact-text">Discord Server</div>
+      <div>Discord Server</div>
     </div>
   </div>
 </div>
@@ -218,18 +200,14 @@ body {
 <script>
 function buy(btn){
   const item = btn.closest('.item');
-
   document.querySelectorAll('.item').forEach(i=>i.classList.remove('active'));
   item.classList.add('active');
 
-  btn.innerText = "Đang xử lý...";
-  btn.style.background = "#16a34a";
-
+  btn.innerText = "Đang mở...";
   setTimeout(()=>{
     window.open("https://zalo.me/84989288257","_blank");
     btn.innerText = "Mua";
-    btn.style.background = "linear-gradient(45deg,#2563eb,#3b82f6)";
-  },400);
+  },300);
 }
 
 function openZalo(){
