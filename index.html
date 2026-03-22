@@ -29,18 +29,13 @@ body {
   backdrop-filter: blur(20px);
   background: rgba(255,255,255,0.08);
   box-shadow: 0 0 30px rgba(0,0,0,0.6);
-  animation: fadeIn 0.6s ease;
-}
-
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(20px);}
-  to {opacity: 1; transform: translateY(0);}
 }
 
 /* AVATAR */
 .avatar-box {
   text-align: center;
   margin-bottom: 15px;
+  animation: fadeDown 1s ease;
 }
 
 .avatar {
@@ -50,17 +45,19 @@ body {
   border: 2px solid #00c6ff;
 }
 
-/* TITLE */
+/* TEXT */
 .title {
   text-align: center;
   font-size: 20px;
   margin-bottom: 5px;
+  animation: fadeUp 1s ease;
 }
 
 .sub {
   text-align: center;
   font-size: 13px;
   opacity: 0.7;
+  animation: fadeUp 1.2s ease;
 }
 
 /* PACKAGE */
@@ -73,14 +70,21 @@ body {
   border-radius: 15px;
   background: rgba(255,255,255,0.05);
   transition: 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s forwards;
 }
 
+.package:nth-child(1) { animation-delay: 0.3s; }
+.package:nth-child(2) { animation-delay: 0.5s; }
+.package:nth-child(3) { animation-delay: 0.7s; }
+
 .package:hover {
-  transform: scale(1.04);
+  transform: scale(1.05);
   background: rgba(255,255,255,0.15);
 }
 
-/* LEFT TEXT */
+/* LEFT */
 .left h3 {
   margin: 0;
 }
@@ -102,10 +106,6 @@ body {
   transition: 0.3s;
   position: relative;
   overflow: hidden;
-}
-
-.btn:hover {
-  transform: scale(1.1);
 }
 
 .btn.clicked {
@@ -138,6 +138,25 @@ body {
   box-shadow: 0 0 20px rgba(255,215,0,0.7);
 }
 
+/* ANIMATION */
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* FOOTER */
 .footer {
   position: fixed;
@@ -154,10 +173,6 @@ body {
   color: #00c6ff;
   text-decoration: none;
 }
-
-.footer a:hover {
-  text-decoration: underline;
-}
 </style>
 
 </head>
@@ -170,7 +185,7 @@ body {
 
     <!-- AVATAR -->
     <div class="avatar-box">
-      <img src="https://i.imgur.com/1X6Q9ZL.png" class="avatar">
+      <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="avatar">
     </div>
 
     <div class="title">🔥 ProXy Premium</div>
@@ -179,7 +194,7 @@ body {
     <!-- PACKAGES -->
     <div class="package">
       <div class="left">
-        <h3>ProXy v1</h3>
+        <h3>Premium v1 ProXy</h3>
         <p>1 Ngày</p>
       </div>
       <button class="btn" onclick="buy(this)">30k 💸</button>
@@ -187,7 +202,7 @@ body {
 
     <div class="package">
       <div class="left">
-        <h3>ProXy v2</h3>
+        <h3>Premium v2 ProXy</h3>
         <p>7 Ngày</p>
       </div>
       <button class="btn" onclick="buy(this)">70k 💸</button>
@@ -195,8 +210,8 @@ body {
 
     <div class="package vip">
       <div class="left">
-        <h3>ProXy v3</h3>
-        <p>30 Ngày • Premium</p>
+        <h3>Premium v3 ProXy</h3>
+        <p>30 Ngày • VIP</p>
       </div>
       <button class="btn" onclick="buy(this)">150k 💸</button>
     </div>
