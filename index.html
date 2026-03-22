@@ -11,22 +11,6 @@ body {
   font-family: Arial;
   background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
   color: white;
-  overflow-x: hidden;
-}
-
-/* PAGE */
-.page {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  padding-top: 40px;
-  transition: 0.5s;
-}
-
-.hidden {
-  transform: translateX(100%);
-  opacity: 0;
 }
 
 /* CONTAINER */
@@ -34,15 +18,30 @@ body {
   width: 90%;
   max-width: 400px;
   margin: auto;
+  padding-top: 40px;
+  padding-bottom: 80px;
 }
 
 /* CARD */
 .card {
   padding: 20px;
-  border-radius: 15px;
+  border-radius: 20px;
   backdrop-filter: blur(20px);
   background: rgba(255,255,255,0.08);
-  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  animation: fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 /* PACKAGE */
@@ -52,23 +51,40 @@ body {
   align-items: center;
   padding: 15px;
   margin-top: 15px;
-  border-radius: 12px;
+  border-radius: 15px;
   background: rgba(255,255,255,0.05);
   transition: 0.3s;
 }
 
 .package:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
   background: rgba(255,255,255,0.15);
 }
 
+/* LEFT TEXT */
+.left h3 {
+  margin: 0;
+}
+
+.left p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
 /* BUTTON */
-button {
+.btn {
   padding: 8px 15px;
-  border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   background: linear-gradient(45deg, #00c6ff, #0072ff);
+  border: none;
   color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
 }
 
 /* VIP */
@@ -77,90 +93,76 @@ button {
   box-shadow: 0 0 20px rgba(255,215,0,0.7);
 }
 
-/* NAV */
-.nav {
+/* FOOTER */
+.footer {
   position: fixed;
   bottom: 0;
   width: 100%;
+  backdrop-filter: blur(15px);
   background: rgba(0,0,0,0.5);
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-  backdrop-filter: blur(10px);
+  padding: 10px;
+  text-align: center;
 }
 
-.nav button {
-  background: none;
+.footer a {
+  color: #00c6ff;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- PAGE 1 -->
-<div id="home" class="page">
-  <div class="container">
-    <div class="card">
-      <h2>🔥 ProXy Premium</h2>
+<div class="container">
 
-      <div class="package">
-        <div>
-          <h3>ProXy v1</h3>
-          <p>1 Ngày</p>
-        </div>
-        <button onclick="buy()">30k 💸</button>
+  <div class="card">
+    <div class="title">🔥 ProXy Premium</div>
+
+    <div class="package">
+      <div class="left">
+        <h3>ProXy v1</h3>
+        <p>1 Ngày</p>
       </div>
-
-      <div class="package">
-        <div>
-          <h3>ProXy v2</h3>
-          <p>7 Ngày</p>
-        </div>
-        <button onclick="buy()">70k 💸</button>
-      </div>
-
-      <div class="package vip">
-        <div>
-          <h3>ProXy v3</h3>
-          <p>30 Ngày • Premium</p>
-        </div>
-        <button onclick="buy()">150k 💸</button>
-      </div>
-
+      <button class="btn" onclick="buy()">30k 💸</button>
     </div>
+
+    <div class="package">
+      <div class="left">
+        <h3>ProXy v2</h3>
+        <p>7 Ngày</p>
+      </div>
+      <button class="btn" onclick="buy()">70k 💸</button>
+    </div>
+
+    <div class="package vip">
+      <div class="left">
+        <h3>ProXy v3</h3>
+        <p>30 Ngày • Premium</p>
+      </div>
+      <button class="btn" onclick="buy()">150k 💸</button>
+    </div>
+
   </div>
+
 </div>
 
-<!-- PAGE 2 -->
-<div id="about" class="page hidden">
-  <div class="container">
-    <div class="card">
-      <h2>📌 Thông tin</h2>
-      <p>Shop ProXy xịn 😈</p>
-      <button onclick="goHome()">⬅️ Quay lại</button>
-    </div>
-  </div>
-</div>
-
-<!-- NAV -->
-<div class="nav">
-  <button onclick="goHome()">🏠</button>
-  <button onclick="goAbout()">📄</button>
+<!-- FOOTER -->
+<div class="footer">
+  <a href="https://zalo.me/84989288257" target="_blank">Zalo</a>
+  |
+  <a href="https://discord.gg/yzRS57WB" target="_blank">Discord</a>
 </div>
 
 <script>
 function buy() {
   window.open("https://zalo.me/84989288257", "_blank");
-}
-
-function goAbout() {
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("about").classList.remove("hidden");
-}
-
-function goHome() {
-  document.getElementById("about").classList.add("hidden");
-  document.getElementById("home").classList.remove("hidden");
 }
 </script>
 
