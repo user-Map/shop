@@ -3,240 +3,241 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ProXy Premium</title>
+<title>Proxy Shop</title>
 
 <style>
-:root {
-  --bg: linear-gradient(135deg,#141e30,#243b55);
-  --card: rgba(255,255,255,0.08);
-  --text: white;
-}
-
-/* LIGHT MODE */
-.light {
-  --bg: linear-gradient(135deg,#f5f7fa,#c3cfe2);
-  --card: rgba(0,0,0,0.05);
-  --text: black;
-}
-
 body {
   margin: 0;
-  font-family: Arial;
-  background: var(--bg);
-  color: var(--text);
-  transition: 0.4s;
+  font-family: -apple-system, BlinkMacSystemFont;
+  background: #0b0f19;
+  color: white;
 }
 
-/* LOADING */
-.loader {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-.loader span {
-  width: 15px;
-  height: 15px;
-  margin: 5px;
-  background: #00c6ff;
-  border-radius: 50%;
-  animation: bounce 0.6s infinite alternate;
-}
-.loader span:nth-child(2){animation-delay:0.2s;}
-.loader span:nth-child(3){animation-delay:0.4s;}
-
-@keyframes bounce {
-  to {transform: translateY(-15px);}
-}
-
-/* container */
-.container {
-  width: 90%;
-  max-width: 400px;
-  margin: auto;
-  padding-top: 20px;
-  padding-bottom: 120px;
-}
-
-/* toggle */
-.toggle {
-  text-align: right;
-}
-.toggle button {
-  border: none;
-  padding: 5px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-/* card */
-.card {
-  padding: 20px;
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-  background: var(--card);
-  box-shadow: 0 0 30px rgba(0,0,0,0.6);
-  animation: fade 0.7s;
-}
-@keyframes fade {
-  from {opacity:0; transform: translateY(20px);}
-}
-
-/* avatar */
-.avatar {
-  width: 90px;
-  border-radius: 50%;
-  display: block;
-  margin: auto;
-  box-shadow: 0 0 25px #00c6ff;
-}
-
-/* status */
-.status {
+/* HEADER */
+.header {
   text-align: center;
-  margin-top: 5px;
-  font-size: 13px;
+  padding: 20px;
 }
-.online {color: #00ff88;}
-.offline {color: red;}
 
-/* package */
-.package {
+.avatar {
+  width: 75px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(0,255,255,0.4);
+}
+
+.title {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.sub {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* SHOP LIST */
+.shop {
+  padding: 15px;
+}
+
+/* CARD */
+.item {
+  background: #111827;
+  border-radius: 16px;
+  padding: 15px;
+  margin-bottom: 12px;
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
-  padding: 15px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.05);
-  transition: 0.3s;
+  align-items: center;
+  transition: 0.25s;
+  border: 1px solid transparent;
 }
-.package:hover {transform: scale(1.05);}
 
-/* button */
-.btn {
-  border: none;
-  padding: 7px 12px;
+.item:hover {
+  background: #1f2937;
+  transform: translateY(-2px);
+}
+
+.item:active {
+  transform: scale(0.96);
+}
+
+.item.active {
+  border: 1px solid #3b82f6;
+  box-shadow: 0 0 20px rgba(59,130,246,0.4);
+}
+
+/* INFO */
+.info {
+  display: flex;
+  flex-direction: column;
+}
+
+.name {
+  font-weight: 500;
+}
+
+.price {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* BUTTON */
+.buy {
+  padding: 6px 12px;
   border-radius: 8px;
-  background: linear-gradient(45deg,#00c6ff,#0072ff);
+  background: #2563eb;
+  border: none;
   color: white;
   cursor: pointer;
+  transition: 0.2s;
 }
-.btn.clicked {transform: scale(0.9);}
 
-/* contact */
+.buy:hover {
+  background: #3b82f6;
+}
+
+.buy:active {
+  transform: scale(0.9);
+}
+
+/* CONTACT */
 .contact {
-  margin-top: 20px;
-  text-align: center;
-}
-.contact img {
-  width: 40px;
-  border-radius: 50%;
-  margin: 5px;
+  margin: 20px 15px;
 }
 
-/* footer */
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
+.contact-title {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.contact-box {
+  background: #111827;
+  border-radius: 14px;
   padding: 10px;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 10px;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.contact-item:hover {
+  background: #1f2937;
+}
+
+.contact-item img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.contact-text {
+  font-size: 14px;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  font-size: 13px;
+  padding: 15px;
+  color: #9ca3af;
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADING -->
-<div class="loader" id="loader">
-<span></span><span></span><span></span>
+<!-- HEADER -->
+<div class="header">
+  <img src="K.PNG" class="avatar">
+  <div class="title">Proxy Premium Shop</div>
+  <div class="sub">Dịch vụ ổn định • tốc độ cao</div>
 </div>
 
-<div class="container">
+<!-- SHOP -->
+<div class="shop">
 
-<div class="toggle">
-<button onclick="toggleMode()">🌗</button>
+<div class="item">
+  <div class="info">
+    <div class="name">Proxy Premium 1 Ngày</div>
+    <div class="price">30VND</div>
+  </div>
+  <button class="buy" onclick="buy(this)">Mua</button>
 </div>
 
-<div class="card">
-
-<img src="k.PNG" class="avatar">
-
-<div class="status online" id="status">● Online</div>
-
-<h3 style="text-align:center;">🔥 ProXy Premium</h3>
-
-<div class="package">
-<span>Premium v1</span>
-<button class="btn" onclick="buy(this)">30k</button>
+<div class="item">
+  <div class="info">
+    <div class="name">Proxy Premium 7 Ngày</div>
+    <div class="price">70VND</div>
+  </div>
+  <button class="buy" onclick="buy(this)">Mua</button>
 </div>
 
-<div class="package">
-<span>Premium v2</span>
-<button class="btn" onclick="buy(this)">70k</button>
+<div class="item">
+  <div class="info">
+    <div class="name">Proxy Premium 30 Ngày</div>
+    <div class="price">150VND</div>
+  </div>
+  <button class="buy" onclick="buy(this)">Mua</button>
 </div>
 
-<div class="package">
-<span>Premium v3</span>
-<button class="btn" onclick="buy(this)">150k</button>
 </div>
 
 <!-- CONTACT -->
 <div class="contact">
-<p>📩 Liên hệ</p>
-<a href="https://zalo.me/84989288257">
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
-</a>
-<a href="https://discord.gg/yzRS57WB">
-<img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
-</a>
+  <div class="contact-title">Liên hệ</div>
+
+  <div class="contact-box">
+
+    <div class="contact-item" onclick="openZalo()">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
+      <div class="contact-text">Zalo: 84989288257</div>
+    </div>
+
+    <div class="contact-item" onclick="openDiscord()">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
+      <div class="contact-text">Discord Server</div>
+    </div>
+
+  </div>
 </div>
 
-</div>
-
-</div>
-
+<!-- FOOTER -->
 <div class="footer">
 ⚠️ IB Zalo để được tư vấn trực tiếp
 </div>
 
 <script>
-// loading
-setTimeout(()=>{
-  document.getElementById("loader").style.display="none";
-},1200);
-
-// buy effect
 function buy(btn){
-  btn.classList.add("clicked");
+  const item = btn.closest('.item');
+
+  document.querySelectorAll('.item').forEach(i=>i.classList.remove('active'));
+  item.classList.add('active');
+
+  btn.innerText = "Đang mở...";
+  btn.style.background = "#16a34a";
+
   setTimeout(()=>{
-    btn.classList.remove("clicked");
-    window.open("https://zalo.me/84989288257");
-  },200);
+    window.open("https://zalo.me/84989288257","_blank");
+    btn.innerText = "Mua";
+    btn.style.background = "#2563eb";
+  },400);
 }
 
-// dark/light
-function toggleMode(){
-  document.body.classList.toggle("light");
+function openZalo(){
+  window.open("https://zalo.me/84989288257","_blank");
 }
 
-// fake online/offline
-setInterval(()=>{
-  const s = document.getElementById("status");
-  if(Math.random()>0.5){
-    s.innerText="● Online";
-    s.className="status online";
-  } else {
-    s.innerText="● Offline";
-    s.className="status offline";
-  }
-},4000);
+function openDiscord(){
+  window.open("https://discord.gg/yzRS57WB","_blank");
+}
 </script>
 
 </body>
