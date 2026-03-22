@@ -130,8 +130,14 @@ body {
 .contact-item {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 12px;
   cursor: pointer;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.contact-item:hover {
+  background: #f3f4f6;
 }
 
 .contact-item img {
@@ -159,46 +165,34 @@ body {
 
 <div class="packages">
 
-<!-- 1 NGÀY -->
 <div class="card" onclick="selectCard(this)">
   <div class="name">Proxy Premium 1 Ngày</div>
   <div class="price">30VND</div>
-
   <div class="features">
     <div>✔ Dùng 24h</div>
     <div>✔ Tốc độ cao</div>
-    <div>✔ Đổi IP nhanh</div>
   </div>
-
   <button class="btn" onclick="buy(event)">Mua ngay</button>
 </div>
 
-<!-- 7 NGÀY -->
 <div class="card" onclick="selectCard(this)">
   <div class="name">Proxy Premium 7 Ngày</div>
   <div class="price">70VND</div>
-
   <div class="features">
     <div>✔ Dùng 7 ngày</div>
     <div>✔ Ổn định cao</div>
-    <div>✔ Support nhanh</div>
   </div>
-
   <button class="btn" onclick="buy(event)">Mua ngay</button>
 </div>
 
-<!-- 30 NGÀY -->
 <div class="card" onclick="selectCard(this)">
   <div class="badge">HOT</div>
   <div class="name">Proxy Premium 30 Ngày</div>
   <div class="price">150VND</div>
-
   <div class="features">
     <div>✔ Dùng 30 ngày</div>
-    <div>✔ Tốc độ max</div>
-    <div>✔ Ưu tiên support</div>
+    <div>✔ support DragAim</div>
   </div>
-
   <button class="btn" onclick="buy(event)">Mua ngay</button>
 </div>
 
@@ -207,20 +201,22 @@ body {
 <!-- CONTACT -->
 <div class="contact">
   <div class="contact-box">
+
     <div class="contact-item" onclick="openZalo()">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
-      Zalo: 84989288257
+      <div>Zalo Chat</div>
     </div>
 
     <div class="contact-item" onclick="openDiscord()">
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
-      Discord Server
+      <div>Sever Có Proxy Miễn Phí</div>
     </div>
+
   </div>
 </div>
 
 <div class="footer">
-⚠️ IB Zalo để mua nhanh
+⚠️ IB Các nền tảng để hỗ trợ nhanh
 </div>
 
 <script>
@@ -239,7 +235,7 @@ function openZalo(){
 }
 
 function openDiscord(){
-  window.open("https://discord.gg/yzRS57WB","_blank");
+  window.open("https://discord.gg/BuzAJg4MtE","_blank");
 }
 </script>
 
