@@ -6,25 +6,51 @@
 <title>ProXy Premium</title>
 
 <style>
+:root {
+  --bg: linear-gradient(135deg,#141e30,#243b55);
+  --card: rgba(255,255,255,0.08);
+  --text: white;
+}
+
+/* LIGHT MODE */
+.light {
+  --bg: linear-gradient(135deg,#f5f7fa,#c3cfe2);
+  --card: rgba(0,0,0,0.05);
+  --text: black;
+}
+
 body {
   margin: 0;
   font-family: Arial;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  color: white;
-  overflow-x: hidden;
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.4s;
 }
 
-/* nền động */
-body::before {
-  content: "";
+/* LOADING */
+.loader {
   position: fixed;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(0,198,255,0.15), transparent 60%);
-  animation: moveBg 10s linear infinite;
+  width: 100%;
+  height: 100%;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
-@keyframes moveBg {
-  50% {transform: translate(-50px,-50px);}
+.loader span {
+  width: 15px;
+  height: 15px;
+  margin: 5px;
+  background: #00c6ff;
+  border-radius: 50%;
+  animation: bounce 0.6s infinite alternate;
+}
+.loader span:nth-child(2){animation-delay:0.2s;}
+.loader span:nth-child(3){animation-delay:0.4s;}
+
+@keyframes bounce {
+  to {transform: translateY(-15px);}
 }
 
 /* container */
@@ -32,9 +58,19 @@ body::before {
   width: 90%;
   max-width: 400px;
   margin: auto;
-  padding-top: 30px;
+  padding-top: 20px;
   padding-bottom: 120px;
-  position: relative;
+}
+
+/* toggle */
+.toggle {
+  text-align: right;
+}
+.toggle button {
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 /* card */
@@ -42,107 +78,64 @@ body::before {
   padding: 20px;
   border-radius: 20px;
   backdrop-filter: blur(20px);
-  background: rgba(255,255,255,0.08);
+  background: var(--card);
   box-shadow: 0 0 30px rgba(0,0,0,0.6);
-  animation: fadeIn 0.8s ease;
+  animation: fade 0.7s;
 }
-@keyframes fadeIn {
+@keyframes fade {
   from {opacity:0; transform: translateY(20px);}
-  to {opacity:1; transform: translateY(0);}
 }
 
 /* avatar */
-.avatar-box {
-  text-align: center;
-}
 .avatar {
-  width: 95px;
+  width: 90px;
   border-radius: 50%;
-  border: 2px solid #00c6ff;
-  box-shadow: 0 0 25px #00c6ff, 0 0 50px #0072ff;
-  transition: 0.3s;
-  animation: glow 2s infinite alternate;
-}
-.avatar:hover {
-  transform: scale(1.1) rotate(3deg);
-}
-@keyframes glow {
-  from {box-shadow: 0 0 15px #00c6ff;}
-  to {box-shadow: 0 0 35px #0072ff;}
+  display: block;
+  margin: auto;
+  box-shadow: 0 0 25px #00c6ff;
 }
 
-/* text */
-.title {
+/* status */
+.status {
   text-align: center;
-  font-size: 20px;
-  margin-top: 10px;
-}
-.sub {
-  text-align: center;
+  margin-top: 5px;
   font-size: 13px;
-  opacity: 0.7;
 }
+.online {color: #00ff88;}
+.offline {color: red;}
 
 /* package */
 .package {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 15px;
   margin-top: 15px;
-  border-radius: 15px;
+  padding: 15px;
+  border-radius: 12px;
   background: rgba(255,255,255,0.05);
   transition: 0.3s;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: showUp 0.6s forwards;
 }
-.package:nth-of-type(1){animation-delay:0.3s;}
-.package:nth-of-type(2){animation-delay:0.5s;}
-.package:nth-of-type(3){animation-delay:0.7s;}
-
-@keyframes showUp {
-  to {opacity:1; transform: translateY(0);}
-}
-
-.package:hover {
-  transform: scale(1.05);
-  background: rgba(255,255,255,0.15);
-}
-
-/* vip */
-.vip {
-  border: 1px solid gold;
-  box-shadow: 0 0 20px gold;
-}
+.package:hover {transform: scale(1.05);}
 
 /* button */
 .btn {
-  padding: 8px 15px;
-  border-radius: 10px;
   border: none;
+  padding: 7px 12px;
+  border-radius: 8px;
   background: linear-gradient(45deg,#00c6ff,#0072ff);
   color: white;
   cursor: pointer;
-  position: relative;
-  overflow: hidden;
 }
 .btn.clicked {transform: scale(0.9);}
 
-/* ripple */
-.ripple {
-  position: absolute;
-  width: 100px;
-  height: 100px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%) scale(0);
-  animation: ripple 0.4s linear;
+/* contact */
+.contact {
+  margin-top: 20px;
+  text-align: center;
 }
-@keyframes ripple {
-  to {transform: translate(-50%,-50%) scale(3); opacity:0;}
+.contact img {
+  width: 40px;
+  border-radius: 50%;
+  margin: 5px;
 }
 
 /* footer */
@@ -150,77 +143,100 @@ body::before {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(15px);
   text-align: center;
   padding: 10px;
-  font-size: 13px;
-}
-
-.footer a {
-  color: #00c6ff;
-  text-decoration: none;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
 }
 </style>
 </head>
 
 <body>
 
+<!-- LOADING -->
+<div class="loader" id="loader">
+<span></span><span></span><span></span>
+</div>
+
 <div class="container">
+
+<div class="toggle">
+<button onclick="toggleMode()">🌗</button>
+</div>
 
 <div class="card">
 
-<!-- AVATAR -->
-<div class="avatar-box">
-<img src="K.PNG" class="avatar">
-</div>
+<img src="k.PNG" class="avatar">
 
-<div class="title">🔥 ProXy Premium</div>
-<div class="sub">Dịch vụ xịn – tốc độ cao 😈</div>
+<div class="status online" id="status">● Online</div>
 
-<!-- PACKAGES -->
+<h3 style="text-align:center;">🔥 ProXy Premium</h3>
+
 <div class="package">
-<div><b>Premium v1 ProXy</b><br><small>1 Ngày</small></div>
-<button class="btn" onclick="buy(this)">30k 💸</button>
+<span>Premium v1</span>
+<button class="btn" onclick="buy(this)">30k</button>
 </div>
 
 <div class="package">
-<div><b>Premium v2 ProXy</b><br><small>7 Ngày</small></div>
-<button class="btn" onclick="buy(this)">70k 💸</button>
+<span>Premium v2</span>
+<button class="btn" onclick="buy(this)">70k</button>
 </div>
 
-<div class="package vip">
-<div><b>Premium v3 ProXy</b><br><small>30 Ngày • VIP</small></div>
-<button class="btn" onclick="buy(this)">150k 💸</button>
+<div class="package">
+<span>Premium v3</span>
+<button class="btn" onclick="buy(this)">150k</button>
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+<p>📩 Liên hệ</p>
+<a href="https://zalo.me/84989288257">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
+</a>
+<a href="https://discord.gg/yzRS57WB">
+<img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
+</a>
 </div>
 
 </div>
 
 </div>
 
-<!-- FOOTER -->
 <div class="footer">
-📞 Liên hệ:
-<a href="https://zalo.me/84989288257" target="_blank">Zalo</a> |
-<a href="https://discord.gg/yzRS57WB" target="_blank">Discord</a>
-<br>
-⚠️ Lưu ý: IB Zalo để được tư vấn trực tiếp
+⚠️ IB Zalo để được tư vấn trực tiếp
 </div>
 
 <script>
+// loading
+setTimeout(()=>{
+  document.getElementById("loader").style.display="none";
+},1200);
+
+// buy effect
 function buy(btn){
   btn.classList.add("clicked");
-
-  const ripple = document.createElement("span");
-  ripple.className="ripple";
-  btn.appendChild(ripple);
-
   setTimeout(()=>{
-    ripple.remove();
     btn.classList.remove("clicked");
-    window.open("https://zalo.me/84989288257","_blank");
-  },300);
+    window.open("https://zalo.me/84989288257");
+  },200);
 }
+
+// dark/light
+function toggleMode(){
+  document.body.classList.toggle("light");
+}
+
+// fake online/offline
+setInterval(()=>{
+  const s = document.getElementById("status");
+  if(Math.random()>0.5){
+    s.innerText="● Online";
+    s.className="status online";
+  } else {
+    s.innerText="● Offline";
+    s.className="status offline";
+  }
+},4000);
 </script>
 
 </body>
