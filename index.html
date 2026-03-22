@@ -1,39 +1,37 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <title>Bio Shop</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<div class="card">
+  <h2>🔥 Gói ProXy Premium</h2>
 
-<!-- LOGIN -->
-<div id="login-box">
-  <div class="card">
-    <h2>Đăng nhập</h2>
-    <button onclick="login()">Login Google</button>
-    <button onclick="login()">Login Facebook</button>
-  </div>
-</div>
-
-<!-- APP -->
-<div id="app">
-  <div class="card">
-    <h1 id="name">User</h1>
-    <p>Bio Shop System</p>
-
-    <div class="btns">
-      <button>Nạp Token</button>
-      <button>Mua Gói</button>
+  <div class="package">
+    <div>
+      <h3>ProXy v1</h3>
+      <p>1 Ngày</p>
     </div>
-
-    <h2>Số dư: <span id="money">0</span></h2>
+    <div>
+      <span>30.000VNĐ 💸</span>
+      <button onclick="showContact()">Mua</button>
+    </div>
   </div>
 
-  <button onclick="logout()">Đăng xuất</button>
+  <div class="package">
+    <div>
+      <h3>ProXy v2</h3>
+      <p>7 Ngày</p>
+    </div>
+    <div>
+      <span>70.000VNĐ 💸</span>
+      <button onclick="showContact()">Mua</button>
+    </div>
+  </div>
+
+  <div class="package vip">
+    <div>
+      <h3>ProXy v3</h3>
+      <p>30 Ngày • Premium</p>
+    </div>
+    <div>
+      <span>150.000VNĐ 💸</span>
+      <button onclick="showContact()">Mua</button>
+    </div>
+  </div>
+
 </div>
-
-<script src="app.js"></script>
-
-</body>
-</html>
