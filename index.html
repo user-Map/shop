@@ -14,7 +14,7 @@ body {
   overflow-x: hidden;
 }
 
-/* nền động nhẹ */
+/* nền động */
 body::before {
   content: "";
   position: fixed;
@@ -24,9 +24,7 @@ body::before {
   animation: moveBg 10s linear infinite;
 }
 @keyframes moveBg {
-  0% {transform: translate(0,0);}
   50% {transform: translate(-50px,-50px);}
-  100% {transform: translate(0,0);}
 }
 
 /* container */
@@ -37,7 +35,6 @@ body::before {
   padding-top: 30px;
   padding-bottom: 120px;
   position: relative;
-  z-index: 2;
 }
 
 /* card */
@@ -49,7 +46,6 @@ body::before {
   box-shadow: 0 0 30px rgba(0,0,0,0.6);
   animation: fadeIn 0.8s ease;
 }
-
 @keyframes fadeIn {
   from {opacity:0; transform: translateY(20px);}
   to {opacity:1; transform: translateY(0);}
@@ -60,15 +56,19 @@ body::before {
   text-align: center;
 }
 .avatar {
-  width: 85px;
+  width: 95px;
   border-radius: 50%;
   border: 2px solid #00c6ff;
-  box-shadow: 0 0 15px #00c6ff;
+  box-shadow: 0 0 25px #00c6ff, 0 0 50px #0072ff;
+  transition: 0.3s;
   animation: glow 2s infinite alternate;
 }
+.avatar:hover {
+  transform: scale(1.1) rotate(3deg);
+}
 @keyframes glow {
-  from {box-shadow: 0 0 10px #00c6ff;}
-  to {box-shadow: 0 0 25px #00c6ff;}
+  from {box-shadow: 0 0 15px #00c6ff;}
+  to {box-shadow: 0 0 35px #0072ff;}
 }
 
 /* text */
@@ -97,10 +97,9 @@ body::before {
   transform: translateY(20px);
   animation: showUp 0.6s forwards;
 }
-
-.package:nth-child(1){animation-delay:0.3s;}
-.package:nth-child(2){animation-delay:0.5s;}
-.package:nth-child(3){animation-delay:0.7s;}
+.package:nth-of-type(1){animation-delay:0.3s;}
+.package:nth-of-type(2){animation-delay:0.5s;}
+.package:nth-of-type(3){animation-delay:0.7s;}
 
 @keyframes showUp {
   to {opacity:1; transform: translateY(0);}
@@ -128,7 +127,6 @@ body::before {
   position: relative;
   overflow: hidden;
 }
-
 .btn.clicked {transform: scale(0.9);}
 
 /* ripple */
@@ -162,7 +160,6 @@ body::before {
 .footer a {
   color: #00c6ff;
   text-decoration: none;
-  margin: 0 5px;
 }
 </style>
 </head>
@@ -173,32 +170,27 @@ body::before {
 
 <div class="card">
 
+<!-- AVATAR -->
 <div class="avatar-box">
-<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="avatar">
+<img src="K.PNG" class="avatar">
 </div>
 
 <div class="title">🔥 ProXy Premium</div>
 <div class="sub">Dịch vụ xịn – tốc độ cao 😈</div>
 
-<!-- packages -->
+<!-- PACKAGES -->
 <div class="package">
-<div>
-<b>Premium v1 ProXy</b><br><small>1 Ngày</small>
-</div>
+<div><b>Premium v1 ProXy</b><br><small>1 Ngày</small></div>
 <button class="btn" onclick="buy(this)">30k 💸</button>
 </div>
 
 <div class="package">
-<div>
-<b>Premium v2 ProXy</b><br><small>7 Ngày</small>
-</div>
+<div><b>Premium v2 ProXy</b><br><small>7 Ngày</small></div>
 <button class="btn" onclick="buy(this)">70k 💸</button>
 </div>
 
 <div class="package vip">
-<div>
-<b>Premium v3 ProXy</b><br><small>30 Ngày • VIP</small>
-</div>
+<div><b>Premium v3 ProXy</b><br><small>30 Ngày • VIP</small></div>
 <button class="btn" onclick="buy(this)">150k 💸</button>
 </div>
 
@@ -206,9 +198,9 @@ body::before {
 
 </div>
 
-<!-- footer -->
+<!-- FOOTER -->
 <div class="footer">
-📞 <b>Liên hệ:</b> 
+📞 Liên hệ:
 <a href="https://zalo.me/84989288257" target="_blank">Zalo</a> |
 <a href="https://discord.gg/yzRS57WB" target="_blank">Discord</a>
 <br>
