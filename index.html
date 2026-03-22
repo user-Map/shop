@@ -3,30 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proxy Shop</title>
+<title>Proxy Packages</title>
 
 <style>
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont;
-  background: #f3f4f6;
-  color: #111;
+  background: #f5f7fb;
 }
 
-/* HEADER */
+/* header */
 .header {
   text-align: center;
-  padding: 25px 15px;
+  padding: 30px 20px;
 }
 
 .avatar {
   width: 80px;
   border-radius: 50%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .title {
-  margin-top: 10px;
+  font-size: 20px;
   font-weight: 600;
 }
 
@@ -35,95 +33,105 @@ body {
   color: #6b7280;
 }
 
-.status {
-  font-size: 12px;
-  color: #22c55e;
-}
-
-/* SHOP */
-.shop {
-  padding: 15px;
-}
-
-/* CARD */
-.item {
-  background: white;
-  border-radius: 16px;
-  padding: 15px;
-  margin-bottom: 12px;
+/* packages */
+.packages {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: 0.2s;
-  border: 1px solid #e5e7eb;
+  flex-direction: column;
+  gap: 15px;
+  padding: 15px;
 }
 
-.item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+/* card */
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  transition: 0.25s;
+  position: relative;
 }
 
-.item:active {
-  transform: scale(0.97);
+.card:hover {
+  transform: translateY(-3px);
 }
 
-.item.active {
-  border: 1px solid #2563eb;
-  box-shadow: 0 0 10px rgba(37,99,235,0.3);
+.card.active {
+  border: 2px solid #2563eb;
 }
 
-/* TEXT */
+/* badge */
+.badge {
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  background: #2563eb;
+  color: white;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+/* name */
 .name {
-  font-weight: 500;
+  font-weight: 600;
+  font-size: 16px;
 }
 
+/* price */
 .price {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+/* feature list */
+.features {
   font-size: 13px;
   color: #6b7280;
+  margin-bottom: 15px;
 }
 
-/* BUTTON */
-.buy {
-  padding: 7px 14px;
+.features div {
+  margin: 4px 0;
+}
+
+/* button */
+.btn {
+  width: 100%;
+  padding: 10px;
   border-radius: 10px;
-  background: #2563eb;
   border: none;
+  background: #2563eb;
   color: white;
+  font-weight: 500;
   cursor: pointer;
   transition: 0.2s;
 }
 
-.buy:hover {
+.btn:hover {
   background: #1d4ed8;
 }
 
-.buy:active {
-  transform: scale(0.9);
+.btn:active {
+  transform: scale(0.95);
 }
 
-/* CONTACT */
+/* contact */
 .contact {
-  margin: 20px 15px;
+  margin: 20px;
 }
 
 .contact-box {
   background: white;
-  border-radius: 14px;
+  border-radius: 15px;
   padding: 10px;
-  border: 1px solid #e5e7eb;
 }
 
 .contact-item {
   display: flex;
   align-items: center;
   padding: 10px;
-  border-radius: 10px;
-  transition: 0.2s;
   cursor: pointer;
-}
-
-.contact-item:hover {
-  background: #f3f4f6;
 }
 
 .contact-item img {
@@ -132,12 +140,11 @@ body {
   margin-right: 10px;
 }
 
-/* FOOTER */
 .footer {
   text-align: center;
   font-size: 13px;
-  padding: 15px;
   color: #6b7280;
+  padding: 15px;
 }
 </style>
 </head>
@@ -146,68 +153,85 @@ body {
 
 <div class="header">
   <img src="K.PNG" class="avatar">
-  <div class="title">Proxy Premium Shop</div>
-  <div class="sub">Dịch vụ FF • Aim </div>
-  <div class="status">● Online</div>
+  <div class="title">Proxy Premium</div>
+  <div class="sub">Chọn gói phù hợp với bạn</div>
 </div>
 
-<div class="shop">
+<div class="packages">
 
-<div class="item">
-  <div>
-    <div class="name">Proxy Premium 1 Ngày</div>
-    <div class="price">30VND</div>
+<!-- 1 NGÀY -->
+<div class="card" onclick="selectCard(this)">
+  <div class="name">Proxy Premium 1 Ngày</div>
+  <div class="price">30VND</div>
+
+  <div class="features">
+    <div>✔ Dùng 24h</div>
+    <div>✔ Tốc độ cao</div>
+    <div>✔ Đổi IP nhanh</div>
   </div>
-  <button class="buy" onclick="buy(this)">Mua</button>
+
+  <button class="btn" onclick="buy(event)">Mua ngay</button>
 </div>
 
-<div class="item">
-  <div>
-    <div class="name">Proxy Premium 7 Ngày</div>
-    <div class="price">70VND</div>
+<!-- 7 NGÀY -->
+<div class="card" onclick="selectCard(this)">
+  <div class="name">Proxy Premium 7 Ngày</div>
+  <div class="price">70VND</div>
+
+  <div class="features">
+    <div>✔ Dùng 7 ngày</div>
+    <div>✔ Ổn định cao</div>
+    <div>✔ Support nhanh</div>
   </div>
-  <button class="buy" onclick="buy(this)">Mua</button>
+
+  <button class="btn" onclick="buy(event)">Mua ngay</button>
 </div>
 
-<div class="item">
-  <div>
-    <div class="name">Proxy Premium 30 Ngày</div>
-    <div class="price">150VND</div>
+<!-- 30 NGÀY -->
+<div class="card" onclick="selectCard(this)">
+  <div class="badge">HOT</div>
+  <div class="name">Proxy Premium 30 Ngày</div>
+  <div class="price">150VND</div>
+
+  <div class="features">
+    <div>✔ Dùng 30 ngày</div>
+    <div>✔ Tốc độ max</div>
+    <div>✔ Ưu tiên support</div>
   </div>
-  <button class="buy" onclick="buy(this)">Mua</button>
+
+  <button class="btn" onclick="buy(event)">Mua ngay</button>
 </div>
 
 </div>
 
+<!-- CONTACT -->
 <div class="contact">
   <div class="contact-box">
     <div class="contact-item" onclick="openZalo()">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
-      <div>Zalo: 84989288257</div>
+      Zalo: 84989288257
     </div>
 
     <div class="contact-item" onclick="openDiscord()">
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
-      <div>Discord Server</div>
+      Discord Server
     </div>
   </div>
 </div>
 
 <div class="footer">
-⚠️ IB Zalo để được tư vấn trực tiếp
+⚠️ IB Zalo để mua nhanh
 </div>
 
 <script>
-function buy(btn){
-  const item = btn.closest('.item');
-  document.querySelectorAll('.item').forEach(i=>i.classList.remove('active'));
-  item.classList.add('active');
+function selectCard(card){
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+}
 
-  btn.innerText = "Đang mở...";
-  setTimeout(()=>{
-    window.open("https://zalo.me/84989288257","_blank");
-    btn.innerText = "Mua";
-  },300);
+function buy(e){
+  e.stopPropagation();
+  window.open("https://zalo.me/84989288257","_blank");
 }
 
 function openZalo(){
