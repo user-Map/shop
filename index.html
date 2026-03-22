@@ -18,8 +18,8 @@ body {
   width: 90%;
   max-width: 400px;
   margin: auto;
-  padding-top: 40px;
-  padding-bottom: 80px;
+  padding-top: 30px;
+  padding-bottom: 100px;
 }
 
 /* CARD */
@@ -37,11 +37,30 @@ body {
   to {opacity: 1; transform: translateY(0);}
 }
 
+/* AVATAR */
+.avatar-box {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #00c6ff;
+}
+
 /* TITLE */
 .title {
   text-align: center;
   font-size: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.sub {
+  text-align: center;
+  font-size: 13px;
+  opacity: 0.7;
 }
 
 /* PACKAGE */
@@ -81,10 +100,36 @@ body {
   color: white;
   cursor: pointer;
   transition: 0.3s;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn:hover {
   transform: scale(1.1);
+}
+
+.btn.clicked {
+  transform: scale(0.9);
+}
+
+/* RIPPLE */
+.ripple {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: ripple 0.4s linear;
+}
+
+@keyframes ripple {
+  to {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
 }
 
 /* VIP */
@@ -99,16 +144,15 @@ body {
   bottom: 0;
   width: 100%;
   backdrop-filter: blur(15px);
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   padding: 10px;
   text-align: center;
+  font-size: 13px;
 }
 
 .footer a {
   color: #00c6ff;
   text-decoration: none;
-  margin: 0 10px;
-  font-size: 14px;
 }
 
 .footer a:hover {
@@ -123,14 +167,22 @@ body {
 <div class="container">
 
   <div class="card">
-    <div class="title">🔥 ProXy Premium</div>
 
+    <!-- AVATAR -->
+    <div class="avatar-box">
+      <img src="https://i.imgur.com/1X6Q9ZL.png" class="avatar">
+    </div>
+
+    <div class="title">🔥 ProXy Premium</div>
+    <div class="sub">Dịch vụ ProXy chất lượng 😈</div>
+
+    <!-- PACKAGES -->
     <div class="package">
       <div class="left">
         <h3>ProXy v1</h3>
         <p>1 Ngày</p>
       </div>
-      <button class="btn" onclick="buy()">30k 💸</button>
+      <button class="btn" onclick="buy(this)">30k 💸</button>
     </div>
 
     <div class="package">
@@ -138,7 +190,7 @@ body {
         <h3>ProXy v2</h3>
         <p>7 Ngày</p>
       </div>
-      <button class="btn" onclick="buy()">70k 💸</button>
+      <button class="btn" onclick="buy(this)">70k 💸</button>
     </div>
 
     <div class="package vip">
@@ -146,7 +198,7 @@ body {
         <h3>ProXy v3</h3>
         <p>30 Ngày • Premium</p>
       </div>
-      <button class="btn" onclick="buy()">150k 💸</button>
+      <button class="btn" onclick="buy(this)">150k 💸</button>
     </div>
 
   </div>
@@ -155,14 +207,22 @@ body {
 
 <!-- FOOTER -->
 <div class="footer">
-  <a href="https://zalo.me/84989288257" target="_blank">Zalo</a>
-  |
-  <a href="https://discord.gg/yzRS57WB" target="_blank">Discord</a>
+  ⚠️ Lưu ý: <a href="https://zalo.me/84989288257" target="_blank">IB Zalo để tư vấn trực tiếp</a>
 </div>
 
 <script>
-function buy() {
-  window.open("https://zalo.me/84989288257", "_blank");
+function buy(btn) {
+  btn.classList.add("clicked");
+
+  const ripple = document.createElement("span");
+  ripple.className = "ripple";
+  btn.appendChild(ripple);
+
+  setTimeout(() => {
+    ripple.remove();
+    btn.classList.remove("clicked");
+    window.open("https://zalo.me/84989288257", "_blank");
+  }, 300);
 }
 </script>
 
