@@ -1,32 +1,46 @@
-body {
+/* package đẹp hơn */
+.package {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  transition: 0.3s;
+}
+
+.package:hover {
+  transform: scale(1.03);
+  background: rgba(255,255,255,0.15);
+}
+
+/* chữ */
+.package h3 {
   margin: 0;
-  font-family: Arial;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: white;
-  text-align: center;
+  font-size: 16px;
 }
 
-.card {
-  margin: auto;
-  margin-top: 100px;
-  width: 90%;
-  max-width: 350px;
-  padding: 20px;
-  border-radius: 15px;
-  backdrop-filter: blur(15px);
-  background: rgba(255,255,255,0.1);
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+.package p {
+  margin: 0;
+  font-size: 12px;
+  opacity: 0.7;
 }
 
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  border-radius: 10px;
-  border: none;
-  background: #00c6ff;
-  color: white;
+/* giá */
+.package span {
+  font-size: 14px;
+  font-weight: bold;
 }
 
-#app {
-  display: none;
+/* nút */
+.package button {
+  margin-top: 5px;
+  background: linear-gradient(45deg, #00c6ff, #0072ff);
+}
+
+/* VIP */
+.vip {
+  border: 1px solid gold;
+  box-shadow: 0 0 15px rgba(255,215,0,0.5);
 }
