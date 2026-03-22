@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bio Shop</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-box">
+  <div class="card">
+    <h2>Đăng nhập</h2>
+    <button onclick="login()">Login Google</button>
+    <button onclick="login()">Login Facebook</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <div class="card">
+    <h1 id="name">User</h1>
+    <p>Bio Shop System</p>
+
+    <div class="btns">
+      <button>Nạp Token</button>
+      <button>Mua Gói</button>
+    </div>
+
+    <h2>Số dư: <span id="money">0</span></h2>
+  </div>
+
+  <button onclick="logout()">Đăng xuất</button>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
