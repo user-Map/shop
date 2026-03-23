@@ -44,11 +44,20 @@ body {
   font-size: 14px;
 }
 
-/* GRID */
-.packages {
-  padding: 20px;
+/* SECTION */
+.section {
+  padding: 10px 20px;
 }
 
+.section-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 20px 0 10px;
+  text-align: center;
+  color: #60a5fa;
+}
+
+/* GRID */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -92,7 +101,6 @@ body {
   align-items: center;
 }
 
-/* IMAGE */
 .product-img {
   width: 80px;
   height: 80px;
@@ -174,6 +182,16 @@ body {
   color: white;
   cursor: pointer;
 }
+
+/* MOBILE */
+@media(max-width:600px){
+  .grid{
+    grid-template-columns: 1fr;
+  }
+  .free-card{
+    grid-column: span 1;
+  }
+}
 </style>
 </head>
 
@@ -187,43 +205,54 @@ body {
   <div class="sub">Premium Proxy Service</div>
 </div>
 
-<div class="packages">
+<!-- 💸 BUY NOW -->
+<div class="section">
+  <div class="section-title">💸 BuyNow</div>
 
-<div class="grid">
+  <div class="grid">
 
-<div class="card" onclick="buy()">
-  <div class="name">Proxy 1 Day</div>
-  <div class="price">30VND</div>
-</div>
+    <div class="card" onclick="buy()">
+      <div class="name">Proxy 1 Day</div>
+      <div class="price">30VND</div>
+    </div>
 
-<div class="card" onclick="buy()">
-  <div class="name">Proxy 7 Days</div>
-  <div class="price">70VND</div>
-</div>
+    <div class="card" onclick="buy()">
+      <div class="name">Proxy 7 Days</div>
+      <div class="price">70VND</div>
+    </div>
 
-<div class="card" onclick="buy()">
-  <div class="name">Proxy 30 Days</div>
-  <div class="price">150VND</div>
-</div>
+    <div class="card" onclick="buy()">
+      <div class="name">Proxy 30 Days</div>
+      <div class="price">150VND</div>
+    </div>
 
-<div class="card" onclick="buy()">
-  <div class="name">Proxy VIP</div>
-  <div class="price">200VND</div>
-</div>
+    <div class="card" onclick="buy()">
+      <div class="name">Proxy VIP</div>
+      <div class="price">200VND</div>
+    </div>
 
-<div class="card free-card" onclick="openFree()">
-  <img src="pin.jpg" class="product-img">
-  <div class="free-info">
-    <div class="free-badge">FREE</div>
-    <div class="name">Proxy Pin Mod</div>
-    <div class="price">0 VND</div>
   </div>
 </div>
 
+<!-- 🆓 FREE -->
+<div class="section">
+  <div class="section-title">🆓 Free</div>
+
+  <div class="grid">
+
+    <div class="card free-card" onclick="openFree()">
+      <img src="pin.jpg" class="product-img">
+      <div class="free-info">
+        <div class="free-badge">FREE</div>
+        <div class="name">Proxy Pin Mod</div>
+        <div class="price">0 VND</div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-</div>
-
+<!-- CONTACT -->
 <div class="contact">
   <div class="contact-box">
     <div class="contact-item" onclick="openZalo()">Zalo Support</div>
