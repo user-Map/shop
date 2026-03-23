@@ -5,15 +5,16 @@ async function login(){
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const { data, error } = await supabase.auth.signInWithPassword({
-    email, password
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
   });
 
-  if(data.user){
-    currentUser = data.user;
-    initApp();
+  if(error){
+    alert(error.message);
   } else {
-    status.innerText = error.message;
+    currentUser = data.user;
+    showApp();
   }
 }
 
@@ -22,17 +23,22 @@ async function register(){
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const { error } = await supabase.auth.signUp({
-    email, password
+  const { error } = await supabaseClient.auth.signUp({
+    email,
+    password
   });
 
-  status.innerText = error ? error.message : "Register OK";
+  if(error){
+    alert(error.message);
+  } else {
+    alert("Register success");
+  }
 }
 
-/* INIT */
-async function initApp(){
-  document.getElementById("auth").style.display="none";
-  document.getElementById("app").style.display="block";
+/* SHOW APP */
+async function showApp(){
+  document.getElementById("auth").style.display = "none";
+  document.getElementById("app").style.display = "block";
 
   document.getElementById("user").innerText = currentUser.email;
 
@@ -41,7 +47,7 @@ async function initApp(){
 
 /* LOAD BALANCE */
 async function loadBalance(){
-  let { data } = await supabase
+  const { data } = await supabaseClient
     .from("profiles")
     .select("*")
     .eq("id", currentUser.id)
@@ -53,43 +59,30 @@ async function loadBalance(){
 
 /* BUY */
 async function buy(name, price){
-
-  let { data } = await supabase
+  const { data } = await supabaseClient
     .from("profiles")
     .select("*")
     .eq("id", currentUser.id)
     .single();
 
-  if(data.balance < price){
+  if(!data || data.balance < price){
     alert("Không đủ tiền");
     return;
   }
 
-  await supabase
+  await supabaseClient
     .from("profiles")
     .update({ balance: data.balance - price })
     .eq("id", currentUser.id);
-
-  await supabase.from("orders").insert({
-    user_id: currentUser.id,
-    package: name,
-    price: price
-  });
 
   alert("Mua thành công!");
   loadBalance();
 }
 
-/* LOGOUT */
-async function logout(){
-  await supabase.auth.signOut();
-  location.reload();
-}
-
 /* AUTO SESSION */
-supabase.auth.getSession().then(({ data }) => {
+supabaseClient.auth.getSession().then(({ data }) => {
   if(data.session){
     currentUser = data.session.user;
-    initApp();
+    showApp();
   }
 });
