@@ -53,6 +53,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: 0.3s;
+}
+
+.avatar-wrapper:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px rgba(59,130,246,0.6);
 }
 
 .avatar {
@@ -62,47 +68,85 @@ body {
   object-fit: cover;
 }
 
-/* layout 2 cột */
-.container {
+/* TITLE */
+.title {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.sub {
+  font-size: 13px;
+  color: #cbd5f5;
+}
+
+/* packages */
+.packages {
   display: flex;
-  gap: 10px;
-  padding: 10px;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px;
 }
 
-.column {
-  flex: 1;
-}
-
+/* section title */
 .section-title {
   text-align: center;
-  margin: 10px 0;
   font-weight: bold;
   color: #60a5fa;
+  margin-top: 10px;
 }
 
-/* card */
+/* glass card */
 .card {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 18px;
   padding: 20px;
-  margin: 10px;
-  cursor: pointer;
   transition: 0.3s;
+  position: relative;
+  cursor: pointer;
 }
 
 .card:hover {
   transform: translateY(-5px) scale(1.02);
 }
 
-/* FREE card */
-.free-card {
-  border: 1px solid #22c55e;
+.card.active {
+  border: 1px solid #3b82f6;
+  box-shadow: 0 0 20px rgba(59,130,246,0.5);
 }
 
-.name { font-weight: 600; }
-.price { font-size: 20px; color: #60a5fa; margin: 8px 0; }
+.badge {
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  background: linear-gradient(45deg, #ef4444, #f59e0b);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.name {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.price {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: #60a5fa;
+}
+
+.features {
+  font-size: 13px;
+  color: #cbd5f5;
+  margin-bottom: 15px;
+}
+
+.features div {
+  margin: 5px 0;
+}
 
 /* button */
 .btn {
@@ -112,7 +156,18 @@ body {
   border: none;
   background: linear-gradient(45deg, #3b82f6, #2563eb);
   color: white;
+  font-weight: 600;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.03);
+}
+
+/* FREE CARD */
+.free-card {
+  border: 1px solid #22c55e;
 }
 
 /* modal */
@@ -146,6 +201,45 @@ body {
   border-radius: 10px;
   text-decoration: none;
 }
+
+/* contact */
+.contact {
+  margin: 20px;
+}
+
+.contact-box {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 15px;
+  padding: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.contact-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.contact-item img {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+
+/* footer */
+.footer {
+  text-align: center;
+  font-size: 13px;
+  color: #94a3b8;
+  padding: 20px;
+}
 </style>
 </head>
 
@@ -157,52 +251,86 @@ body {
   <div class="avatar-wrapper">
     <img src="K.PNG" class="avatar">
   </div>
-  <div>Proxy Premium</div>
+  <div class="title">Proxy Premium</div>
+  <div class="sub">Chọn gói phù hợp với bạn</div>
 </div>
 
-<div class="container">
+<div class="packages">
 
-  <!-- BUY -->
-  <div class="column">
-    <div class="section-title">BUY NOW</div>
+<!-- BUY -->
+<div class="section-title">BUY NOW</div>
 
-    <div class="card">
-      <div class="name">Proxy 1 Ngày</div>
-      <div class="price">30VND</div>
-      <button class="btn" onclick="buy()">Mua ngay</button>
-    </div>
-
-    <div class="card">
-      <div class="name">Proxy 7 Ngày</div>
-      <div class="price">70VND</div>
-      <button class="btn" onclick="buy()">Mua ngay</button>
-    </div>
-
-    <div class="card">
-      <div class="name">Proxy 30 Ngày</div>
-      <div class="price">150VND</div>
-      <button class="btn" onclick="buy()">Mua ngay</button>
-    </div>
+<div class="card" onclick="selectCard(this)">
+  <div class="name">Proxy Premium 1 Ngày</div>
+  <div class="price">30VND</div>
+  <div class="features">
+    <div>✔ Dùng 24h</div>
+    <div>✔ Tốc độ cao</div>
   </div>
+  <button class="btn" onclick="buy(event)">Mua ngay</button>
+</div>
 
-  <!-- FREE -->
-  <div class="column">
-    <div class="section-title">FREE</div>
-
-    <div class="card free-card" onclick="openFree()">
-      <div class="name">Proxy Pin Mod</div>
-      <div class="price">FREE</div>
-      <div>Click để tải</div>
-    </div>
+<div class="card" onclick="selectCard(this)">
+  <div class="name">Proxy Premium 7 Ngày</div>
+  <div class="price">70VND</div>
+  <div class="features">
+    <div>✔ Dùng 7 ngày</div>
+    <div>✔ Ổn định cao</div>
   </div>
+  <button class="btn" onclick="buy(event)">Mua ngay</button>
+</div>
 
+<div class="card" onclick="selectCard(this)">
+  <div class="badge">HOT</div>
+  <div class="name">Proxy Premium 30 Ngày</div>
+  <div class="price">150VND</div>
+  <div class="features">
+    <div>✔ Dùng 30 ngày</div>
+    <div>✔ Support DragAim</div>
+  </div>
+  <button class="btn" onclick="buy(event)">Mua ngay</button>
+</div>
+
+<!-- FREE -->
+<div class="section-title">FREE</div>
+
+<div class="card free-card" onclick="openFree()">
+  <div class="name">Proxy Pin Mod</div>
+  <div class="price">FREE</div>
+  <div class="features">
+    <div>✔ Click để tải</div>
+    <div>✔ Link direct</div>
+  </div>
+</div>
+
+</div>
+
+<!-- CONTACT -->
+<div class="contact">
+  <div class="contact-box">
+
+    <div class="contact-item" onclick="openZalo()">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
+      <div>Zalo Chat</div>
+    </div>
+
+    <div class="contact-item" onclick="openDiscord()">
+      <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
+      <div>Server Proxy Free</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="footer">
+⚠️ IB để được hỗ trợ nhanh
 </div>
 
 <!-- MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
     <h3>Proxy Pin Mod</h3>
-    <p>Nhấn nút bên dưới để tải</p>
+    <p>Nhấn để tải file</p>
     <a href="https://link4m.com/GyCC2" target="_blank">Tải ngay</a>
     <br><br>
     <button class="btn" onclick="closeModal()">Đóng</button>
@@ -210,8 +338,22 @@ body {
 </div>
 
 <script>
-function buy(){
+function selectCard(card){
+  document.querySelectorAll('.card').forEach(c=>c.classList.remove('active'));
+  card.classList.add('active');
+}
+
+function buy(e){
+  e.stopPropagation();
   window.open("https://zalo.me/84989288257","_blank");
+}
+
+function openZalo(){
+  window.open("https://zalo.me/84989288257","_blank");
+}
+
+function openDiscord(){
+  window.open("https://discord.gg/BuzAJg4MtE","_blank");
 }
 
 function openFree(){
