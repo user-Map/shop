@@ -9,26 +9,25 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont;
-  background: radial-gradient(circle at top, #020617, #000);
+  background: linear-gradient(180deg, #020617, #000);
   color: white;
 }
 
-/* HEADER */
+/* HERO */
 .header {
   text-align: center;
-  padding: 30px 20px;
+  padding: 40px 20px;
+  background: radial-gradient(circle at top, rgba(59,130,246,0.2), transparent 60%);
 }
 
 .avatar-wrapper {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   margin: auto;
   padding: 4px;
   border-radius: 50%;
-  background: conic-gradient(#3b82f6, #22c55e, #a855f7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(45deg, #3b82f6, #22c55e, #a855f7);
+  box-shadow: 0 0 40px rgba(59,130,246,0.5);
 }
 
 .avatar {
@@ -38,12 +37,13 @@ body {
 }
 
 .title {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 800;
+  margin-top: 10px;
 }
 
 .sub {
-  font-size: 13px;
+  font-size: 14px;
   color: #94a3b8;
 }
 
@@ -55,36 +55,48 @@ body {
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 16px;
 }
 
 /* CARD */
 .card {
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(15px);
-  border-radius: 16px;
+  position: relative;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(20px);
+  border-radius: 18px;
   padding: 18px;
-  border: 1px solid rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
   cursor: pointer;
-  transition: 0.25s;
+  transition: 0.3s ease;
+  overflow: hidden;
+}
+
+/* glow border */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 1px;
+  background: linear-gradient(45deg, transparent, rgba(59,130,246,0.5), transparent);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
 }
 
 .card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7);
 }
 
-.card:active {
-  transform: scale(0.97);
-}
-
+/* TEXT */
 .name {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
 }
 
 .price {
-  font-size: 22px;
+  font-size: 24px;
   color: #60a5fa;
   margin-top: 8px;
 }
@@ -92,17 +104,31 @@ body {
 /* FREE */
 .free-card {
   grid-column: span 2;
-  border: 1px solid rgba(34,197,94,0.4);
-  background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(59,130,246,0.08));
+  background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(59,130,246,0.1));
+  border: 1px solid rgba(34,197,94,0.5);
 }
 
 .free-badge {
-  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
   background: #22c55e;
-  padding: 4px 10px;
+  padding: 5px 10px;
   border-radius: 8px;
   font-size: 11px;
-  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+/* BUTTON (optional if needed later) */
+.btn {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #3b82f6, #2563eb);
+  color: white;
+  cursor: pointer;
 }
 
 /* CONTACT */
@@ -113,8 +139,9 @@ body {
 .contact-box {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(15px);
-  border-radius: 12px;
+  border-radius: 14px;
   padding: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .contact-item {
@@ -134,36 +161,14 @@ body {
   padding: 20px;
 }
 
-/* MODAL */
-.modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.7);
-}
-
-.modal.show {
-  display: flex;
-}
-
-.modal-content {
-  background: #0f172a;
-  padding: 25px;
-  border-radius: 14px;
-  width: 85%;
-  text-align: center;
-}
-
-.btn {
-  margin-top: 10px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 10px;
-  background: #3b82f6;
-  color: white;
-  cursor: pointer;
+/* MOBILE */
+@media(max-width: 500px){
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .free-card {
+    grid-column: span 1;
+  }
 }
 </style>
 </head>
@@ -175,41 +180,39 @@ body {
     <img src="K.PNG" class="avatar">
   </div>
   <div class="title">Proxy UserMap</div>
-  <div class="sub">Premium Proxy Service</div>
+  <div class="sub">Premium Proxy • Fast • Stable</div>
 </div>
 
 <div class="packages">
+  <div class="grid">
 
-<div class="grid">
+    <div class="card" onclick="buy()">
+      <div class="name">Proxy 1 Day</div>
+      <div class="price">30VND</div>
+    </div>
 
-<div class="card" onclick="buy()">
-  <div class="name">Proxy 1 Day</div>
-  <div class="price">30VND</div>
-</div>
+    <div class="card" onclick="buy()">
+      <div class="name">Proxy 7 Days</div>
+      <div class="price">70VND</div>
+    </div>
 
-<div class="card" onclick="buy()">
-  <div class="name">Proxy 7 Days</div>
-  <div class="price">70VND</div>
-</div>
+    <div class="card" onclick="buy()">
+      <div class="name">Proxy 30 Days</div>
+      <div class="price">150VND</div>
+    </div>
 
-<div class="card" onclick="buy()">
-  <div class="name">Proxy 30 Days</div>
-  <div class="price">150VND</div>
-</div>
+    <div class="card" onclick="buy()">
+      <div class="name">Proxy VIP</div>
+      <div class="price">200VND</div>
+    </div>
 
-<div class="card" onclick="buy()">
-  <div class="name">Proxy VIP</div>
-  <div class="price">200VND</div>
-</div>
+    <div class="card free-card" onclick="openFree()">
+      <div class="free-badge">FREE</div>
+      <div class="name">Proxy Pin Mod</div>
+      <div class="price">0 VND</div>
+    </div>
 
-<div class="card free-card" onclick="openFree()">
-  <div class="free-badge">FREE</div>
-  <div class="name">Proxy Pin Mod</div>
-  <div class="price">0 VND</div>
-</div>
-
-</div>
-
+  </div>
 </div>
 
 <div class="contact">
@@ -221,8 +224,8 @@ body {
 <div class="footer">© Proxy UserMap</div>
 
 <!-- MODAL -->
-<div id="modal" class="modal">
-  <div class="modal-content">
+<div id="modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);justify-content:center;align-items:center;">
+  <div style="background:#0f172a;padding:25px;border-radius:14px;width:85%;text-align:center;">
     <h3>Proxy Pin Mod</h3>
     <p>Tải file tại đây</p>
     <button class="btn" onclick="goDownload()">Tải ngay</button>
@@ -241,11 +244,11 @@ function openZalo(){
 }
 
 function openFree(){
-  document.getElementById("modal").classList.add("show");
+  document.getElementById("modal").style.display="flex";
 }
 
 function closeModal(){
-  document.getElementById("modal").classList.remove("show");
+  document.getElementById("modal").style.display="none";
 }
 
 function goDownload(){
