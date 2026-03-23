@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Proxy UserMap</title>
 
 <style>
@@ -17,10 +17,7 @@ body {
 /* SNOW */
 .snow {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   pointer-events: none;
   z-index: 9999;
 }
@@ -53,12 +50,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: 0.3s;
-}
-
-.avatar-wrapper:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 25px rgba(59,130,246,0.6);
 }
 
 .avatar {
@@ -78,7 +69,7 @@ body {
   color: #cbd5f5;
 }
 
-/* packages */
+/* PACKAGES */
 .packages {
   display: flex;
   flex-direction: column;
@@ -86,7 +77,6 @@ body {
   padding: 20px;
 }
 
-/* section title */
 .section-title {
   text-align: center;
   font-weight: bold;
@@ -94,7 +84,7 @@ body {
   margin-top: 10px;
 }
 
-/* card */
+/* CARD */
 .card {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(12px);
@@ -147,7 +137,7 @@ body {
   margin: 5px 0;
 }
 
-/* button */
+/* BUTTON */
 .btn {
   width: 100%;
   padding: 11px;
@@ -157,11 +147,6 @@ body {
   color: white;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn:hover {
-  transform: scale(1.03);
 }
 
 /* FREE CARD */
@@ -171,6 +156,7 @@ body {
   box-shadow: 0 0 25px rgba(34,197,94,0.2);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .free-card::before {
@@ -182,6 +168,7 @@ body {
   top: -50%;
   left: -50%;
   animation: rotateGlow 6s linear infinite;
+  pointer-events: none; /* FIX CLICK */
 }
 
 @keyframes rotateGlow {
@@ -209,21 +196,15 @@ body {
   background: linear-gradient(45deg, #22c55e, #16a34a);
 }
 
-.free-btn:hover {
-  box-shadow: 0 0 15px rgba(34,197,94,0.6);
-}
-
-/* modal */
+/* MODAL */
 .modal {
   display: none;
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.7);
   justify-content: center;
   align-items: center;
+  z-index: 99999;
 }
 
 .modal-content {
@@ -234,10 +215,9 @@ body {
   width: 80%;
   text-align: center;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 0 30px rgba(34,197,94,0.2);
 }
 
-.modal-content a {
+.modal a {
   display: inline-block;
   margin-top: 15px;
   padding: 10px 15px;
@@ -247,7 +227,7 @@ body {
   text-decoration: none;
 }
 
-/* contact */
+/* CONTACT */
 .contact {
   margin: 20px;
 }
@@ -278,7 +258,7 @@ body {
   margin-right: 10px;
 }
 
-/* footer */
+/* FOOTER */
 .footer {
   text-align: center;
   font-size: 13px;
@@ -302,7 +282,6 @@ body {
 
 <div class="packages">
 
-<!-- BUY -->
 <div class="section-title">BUY NOW</div>
 
 <div class="card">
@@ -336,7 +315,6 @@ body {
   <button class="btn" onclick="buy(event)">Mua ngay</button>
 </div>
 
-<!-- FREE -->
 <div class="section-title">FREE</div>
 
 <div class="card free-card" onclick="openFree()">
@@ -346,14 +324,13 @@ body {
   <div class="features">
     <div>⚡ Tải nhanh</div>
     <div>🔓 Không cần thanh toán</div>
-    <div>📦 File Script</div>
+    <div>📦 File direct</div>
   </div>
   <button class="btn free-btn">Nhấn để tải</button>
 </div>
 
 </div>
 
-<!-- CONTACT -->
 <div class="contact">
   <div class="contact-box">
 
@@ -378,7 +355,7 @@ body {
 <div id="modal" class="modal">
   <div class="modal-content">
     <h3>Proxy Pin Mod</h3>
-    <p>Nhấn nút bên dưới để tải file</p>
+    <p>Nhấn để tải file</p>
     <a href="https://link4m.com/GyCC2" target="_blank">Tải ngay</a>
     <br><br>
     <button class="btn" onclick="closeModal()">Đóng</button>
