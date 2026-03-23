@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Proxy Packages</title>
+<title>Proxy UserMap</title>
 
 <style>
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: radial-gradient(circle at top, #0f172a, #020617);
   color: white;
   overflow-x: hidden;
 }
@@ -40,8 +40,8 @@ body {
 }
 
 .avatar-wrapper {
-  width: 95px;
-  height: 95px;
+  width: 100px;
+  height: 100px;
   margin: 0 auto 12px;
   padding: 3px;
   border-radius: 50%;
@@ -49,6 +49,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 25px rgba(59,130,246,0.4);
 }
 
 .avatar {
@@ -59,73 +60,86 @@ body {
 }
 
 .title {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
 }
 
 .sub {
   font-size: 13px;
-  color: #cbd5f5;
+  color: #94a3b8;
 }
 
-/* PACKAGES */
+/* LAYOUT */
 .packages {
+  padding: 20px;
   display: flex;
   flex-direction: column;
   gap: 18px;
-  padding: 20px;
 }
 
 .section-title {
   text-align: center;
+  margin: 10px 0;
   font-weight: bold;
   color: #60a5fa;
-  margin-top: 10px;
 }
 
 /* CARD */
 .card {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(18px);
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 18px;
   padding: 20px;
-  transition: 0.3s;
-  position: relative;
+  transition: 0.3s ease;
   cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background: radial-gradient(circle, rgba(59,130,246,0.15), transparent 60%);
+  transform: rotate(0deg);
+  animation: glowMove 8s linear infinite;
+}
+
+@keyframes glowMove {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
 }
 
-.badge {
-  position: absolute;
-  top: -10px;
-  right: 15px;
-  background: linear-gradient(45deg, #ef4444, #f59e0b);
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 8px;
+.card:active {
+  transform: scale(0.97);
+}
+
+.card.active {
+  border: 1px solid #3b82f6;
+  box-shadow: 0 0 25px rgba(59,130,246,0.6);
 }
 
 .name {
+  font-size: 18px;
   font-weight: 600;
-  font-size: 17px;
 }
 
 .price {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
-  margin: 10px 0;
   color: #60a5fa;
+  margin: 10px 0;
 }
 
 .features {
   font-size: 13px;
   color: #cbd5f5;
-  margin-bottom: 15px;
 }
 
 .features div {
@@ -134,8 +148,9 @@ body {
 
 /* BUTTON */
 .btn {
+  margin-top: 12px;
   width: 100%;
-  padding: 11px;
+  padding: 12px;
   border-radius: 12px;
   border: none;
   background: linear-gradient(45deg, #3b82f6, #2563eb);
@@ -149,29 +164,14 @@ body {
   transform: scale(1.03);
 }
 
+.btn:active {
+  transform: scale(0.95);
+}
+
 /* FREE CARD */
 .free-card {
   border: 1px solid rgba(34,197,94,0.4);
   background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(59,130,246,0.08));
-  position: relative;
-  overflow: hidden;
-}
-
-.free-card::before {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(34,197,94,0.2), transparent 60%);
-  top: -50%;
-  left: -50%;
-  animation: rotateGlow 6s linear infinite;
-  pointer-events: none; /* FIX CLICK */
-}
-
-@keyframes rotateGlow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
 }
 
 .free-badge {
@@ -182,6 +182,7 @@ body {
   padding: 4px 10px;
   font-size: 11px;
   border-radius: 8px;
+  font-weight: bold;
 }
 
 /* MODAL */
@@ -189,19 +190,30 @@ body {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.75);
   justify-content: center;
   align-items: center;
   z-index: 99999;
 }
 
+.modal.show {
+  display: flex;
+}
+
 .modal-content {
   background: rgba(15,23,42,0.95);
+  backdrop-filter: blur(15px);
   padding: 25px;
   border-radius: 16px;
-  width: 80%;
+  width: 85%;
   text-align: center;
   border: 1px solid rgba(255,255,255,0.15);
+  animation: pop 0.25s ease;
+}
+
+@keyframes pop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 /* CONTACT */
@@ -210,10 +222,11 @@ body {
 }
 
 .contact-box {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(15px);
   border-radius: 15px;
   padding: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .contact-item {
@@ -222,6 +235,7 @@ body {
   padding: 12px;
   border-radius: 10px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .contact-item:hover {
@@ -274,19 +288,16 @@ body {
   <div class="name">Proxy Premium 7 Ngày</div>
   <div class="price">70VND</div>
   <div class="features">
-    <div>✔ Dùng 7 ngày</div>
-    <div>✔ Ổn định cao</div>
+    <div>✔ Ổn định</div>
   </div>
   <button class="btn" onclick="buy()">Mua ngay</button>
 </div>
 
 <div class="card">
-  <div class="badge">HOT</div>
   <div class="name">Proxy Premium 30 Ngày</div>
   <div class="price">150VND</div>
   <div class="features">
-    <div>✔ Dùng 30 ngày</div>
-    <div>✔ Support DragAim</div>
+    <div>✔ Full support</div>
   </div>
   <button class="btn" onclick="buy()">Mua ngay</button>
 </div>
@@ -299,7 +310,7 @@ body {
   <div class="price">0 VND</div>
   <div class="features">
     <div>⚡ Tải nhanh</div>
-    <div>🔓 Không cần thanh toán</div>
+    <div>🔓 Free</div>
   </div>
   <button class="btn">Nhấn để tải</button>
 </div>
@@ -308,7 +319,6 @@ body {
 
 <div class="contact">
   <div class="contact-box">
-
     <div class="contact-item" onclick="openZalo()">
       <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
       <div>Zalo Chat</div>
@@ -318,7 +328,6 @@ body {
       <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png">
       <div>Server Proxy Free</div>
     </div>
-
   </div>
 </div>
 
@@ -350,13 +359,12 @@ function openDiscord(){
   window.open("https://discord.gg/BuzAJg4MtE","_blank");
 }
 
-/* FREE */
 function openFree(){
-  document.getElementById("modal").style.display = "flex";
+  document.getElementById("modal").classList.add("show");
 }
 
 function closeModal(){
-  document.getElementById("modal").style.display = "none";
+  document.getElementById("modal").classList.remove("show");
 }
 
 function goDownload(){
@@ -372,7 +380,7 @@ for(let i=0;i<60;i++){
   s.innerHTML = "❄";
   s.style.left = Math.random()*100+"vw";
   s.style.animationDuration = (Math.random()*4+3)+"s";
-  s.style.fontSize = (Math.random()*8+10)+"px";
+  s.style.fontSize = (Math.random()*10+10)+"px";
   snow.appendChild(s);
 }
 </script>
