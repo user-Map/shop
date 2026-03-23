@@ -9,49 +9,26 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont;
-  background: radial-gradient(circle at top, #020617, #020617 40%, #000);
+  background: radial-gradient(circle at top, #020617, #000);
   color: white;
-  overflow-x: hidden;
-}
-
-/* SNOW */
-.snow {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-}
-
-.snowflake {
-  position: absolute;
-  top: -10px;
-  opacity: 0.6;
-  animation: fall linear infinite;
-}
-
-@keyframes fall {
-  to { transform: translateY(100vh); }
 }
 
 /* HEADER */
 .header {
   text-align: center;
-  padding: 35px 20px;
-  transform: translateY(0);
-  transition: 0.3s;
+  padding: 30px 20px;
 }
 
 .avatar-wrapper {
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   margin: auto;
   padding: 4px;
   border-radius: 50%;
-  background: conic-gradient(#3b82f6, #22c55e, #a855f7, #3b82f6);
+  background: conic-gradient(#3b82f6, #22c55e, #a855f7);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 40px rgba(59,130,246,0.6);
 }
 
 .avatar {
@@ -61,10 +38,8 @@ body {
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 800;
-  margin-top: 10px;
-  letter-spacing: 0.5px;
+  font-size: 26px;
+  font-weight: 700;
 }
 
 .sub {
@@ -72,164 +47,62 @@ body {
   color: #94a3b8;
 }
 
-/* PACKAGES */
+/* GRID */
 .packages {
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
 }
 
-.section-title {
-  text-align: center;
-  margin: 15px 0;
-  font-weight: bold;
-  color: #60a5fa;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
 }
 
 /* CARD */
 .card {
   background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(20px);
-  border-radius: 18px;
-  padding: 20px;
+  backdrop-filter: blur(15px);
+  border-radius: 16px;
+  padding: 18px;
   border: 1px solid rgba(255,255,255,0.08);
-  position: relative;
-  overflow: hidden;
   cursor: pointer;
-  transition: transform 0.25s, box-shadow 0.25s;
-}
-
-/* glow */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: -60%;
-  background: radial-gradient(circle, rgba(59,130,246,0.2), transparent 60%);
-  animation: rotateGlow 12s linear infinite;
-}
-
-@keyframes rotateGlow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  transition: 0.25s;
 }
 
 .card:hover {
-  box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
 }
 
-/* tilt effect */
-.card-inner {
-  position: relative;
-  z-index: 2;
+.card:active {
+  transform: scale(0.97);
 }
 
-/* TEXT */
 .name {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
 }
 
 .price {
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 22px;
   color: #60a5fa;
-  margin: 10px 0;
+  margin-top: 8px;
 }
 
 /* FREE */
 .free-card {
+  grid-column: span 2;
   border: 1px solid rgba(34,197,94,0.4);
   background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(59,130,246,0.08));
 }
 
 .free-badge {
-  position: absolute;
-  top: -10px;
-  right: 15px;
-  background: linear-gradient(45deg, #22c55e, #16a34a);
-  padding: 5px 12px;
-  font-size: 11px;
+  display: inline-block;
+  background: #22c55e;
+  padding: 4px 10px;
   border-radius: 8px;
-  font-weight: bold;
-}
-
-/* BUTTON */
-.btn {
-  margin-top: 12px;
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(45deg, #3b82f6, #2563eb);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn:active {
-  transform: scale(0.95);
-}
-
-/* DETAIL PANEL */
-.detail {
-  position: fixed;
-  bottom: -120%;
-  left: 0;
-  width: 100%;
-  background: rgba(2,6,23,0.95);
-  backdrop-filter: blur(25px);
-  border-top-left-radius: 22px;
-  border-top-right-radius: 22px;
-  padding: 25px;
-  transition: 0.4s cubic-bezier(.2,.8,.2,1);
-  z-index: 99999;
-}
-
-.detail.show {
-  bottom: 0;
-}
-
-/* MODAL */
-.modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(10px);
-  z-index: 99999;
-}
-
-.modal.show {
-  display: flex;
-}
-
-.modal-content {
-  background: rgba(15,23,42,0.95);
-  padding: 25px;
-  border-radius: 16px;
-  width: 85%;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-/* LOADING */
-.loader {
-  border: 3px solid rgba(255,255,255,0.2);
-  border-top: 3px solid #3b82f6;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  animation: spin 0.8s linear infinite;
-  margin: auto;
-  display: none;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
+  font-size: 11px;
+  margin-bottom: 8px;
 }
 
 /* CONTACT */
@@ -240,16 +113,12 @@ body {
 .contact-box {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(15px);
-  border-radius: 15px;
+  border-radius: 12px;
   padding: 10px;
-  border: 1px solid rgba(255,255,255,0.1);
 }
 
 .contact-item {
-  display: flex;
-  align-items: center;
   padding: 12px;
-  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -257,18 +126,49 @@ body {
   background: rgba(255,255,255,0.08);
 }
 
+/* FOOTER */
 .footer {
   text-align: center;
   font-size: 13px;
   color: #94a3b8;
   padding: 20px;
 }
+
+/* MODAL */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.7);
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background: #0f172a;
+  padding: 25px;
+  border-radius: 14px;
+  width: 85%;
+  text-align: center;
+}
+
+.btn {
+  margin-top: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background: #3b82f6;
+  color: white;
+  cursor: pointer;
+}
 </style>
 </head>
 
 <body>
-
-<div class="snow"></div>
 
 <div class="header">
   <div class="avatar-wrapper">
@@ -280,92 +180,68 @@ body {
 
 <div class="packages">
 
-<div class="section-title">BUY NOW</div>
+<div class="grid">
 
-<div class="card tilt" onclick="openDetail('1 Day','30VND','Dùng 24h - tốc độ cao')">
-  <div class="card-inner">
-    <div class="name">Proxy 1 Day</div>
-    <div class="price">30VND</div>
-  </div>
+<div class="card" onclick="buy()">
+  <div class="name">Proxy 1 Day</div>
+  <div class="price">30VND</div>
 </div>
 
-<div class="card tilt" onclick="openDetail('7 Days','70VND','Ổn định cao')">
-  <div class="card-inner">
-    <div class="name">Proxy 7 Days</div>
-    <div class="price">70VND</div>
-  </div>
+<div class="card" onclick="buy()">
+  <div class="name">Proxy 7 Days</div>
+  <div class="price">70VND</div>
 </div>
 
-<div class="card tilt" onclick="openDetail('30 Days','150VND','Full support')">
-  <div class="card-inner">
-    <div class="name">Proxy 30 Days</div>
-    <div class="price">150VND</div>
-  </div>
+<div class="card" onclick="buy()">
+  <div class="name">Proxy 30 Days</div>
+  <div class="price">150VND</div>
 </div>
 
-<div class="section-title">FREE</div>
+<div class="card" onclick="buy()">
+  <div class="name">Proxy VIP</div>
+  <div class="price">200VND</div>
+</div>
 
-<div class="card free-card tilt" onclick="openFree()">
+<div class="card free-card" onclick="openFree()">
   <div class="free-badge">FREE</div>
-  <div class="card-inner">
-    <div class="name">Proxy Pin Mod</div>
-    <div class="price">0 VND</div>
-  </div>
+  <div class="name">Proxy Pin Mod</div>
+  <div class="price">0 VND</div>
 </div>
 
 </div>
 
-<!-- DETAIL -->
-<div id="detail" class="detail">
-  <h2 id="dTitle"></h2>
-  <p id="dDesc"></p>
-  <button class="btn" onclick="buy()">Mua ngay</button>
-  <button class="btn" onclick="closeDetail()">Đóng</button>
-</div>
-
-<!-- MODAL -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <h3>Đang chuẩn bị tải...</h3>
-    <div class="loader" id="loader"></div>
-    <button class="btn" onclick="goDownload()">Tải ngay</button>
-    <button class="btn" onclick="closeModal()">Đóng</button>
-  </div>
 </div>
 
 <div class="contact">
   <div class="contact-box">
-    <div class="contact-item" onclick="openZalo()">
-      <div>Zalo Support</div>
-    </div>
+    <div class="contact-item" onclick="openZalo()">Zalo Support</div>
   </div>
 </div>
 
 <div class="footer">© Proxy UserMap</div>
 
+<!-- MODAL -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <h3>Proxy Pin Mod</h3>
+    <p>Tải file tại đây</p>
+    <button class="btn" onclick="goDownload()">Tải ngay</button>
+    <br><br>
+    <button class="btn" onclick="closeModal()">Đóng</button>
+  </div>
+</div>
+
 <script>
-/* DETAIL */
-function openDetail(t,p,d){
-  document.getElementById("detail").classList.add("show");
-  document.getElementById("dTitle").innerText = t + " - " + p;
-  document.getElementById("dDesc").innerText = d;
-}
-
-function closeDetail(){
-  document.getElementById("detail").classList.remove("show");
-}
-
-/* BUY */
 function buy(){
   window.open("https://zalo.me/84989288257","_blank");
 }
 
-/* FREE */
+function openZalo(){
+  window.open("https://zalo.me/84989288257","_blank");
+}
+
 function openFree(){
   document.getElementById("modal").classList.add("show");
-  let loader = document.getElementById("loader");
-  loader.style.display = "block";
-  setTimeout(()=> loader.style.display="none", 1200);
 }
 
 function closeModal(){
@@ -374,43 +250,6 @@ function closeModal(){
 
 function goDownload(){
   window.open("https://link4m.com/GyCC2","_blank");
-}
-
-function openZalo(){
-  window.open("https://zalo.me/84989288257","_blank");
-}
-
-/* TILT EFFECT */
-document.querySelectorAll(".tilt").forEach(card=>{
-  card.addEventListener("mousemove",(e)=>{
-    let rect = card.getBoundingClientRect();
-    let x = e.clientX - rect.left;
-    let y = e.clientY - rect.top;
-
-    let cx = rect.width/2;
-    let cy = rect.height/2;
-
-    let dx = (x - cx)/20;
-    let dy = (y - cy)/20;
-
-    card.style.transform = `rotateX(${-dy}deg) rotateY(${dx}deg) scale(1.03)`;
-  });
-
-  card.addEventListener("mouseleave",()=>{
-    card.style.transform = "rotateX(0) rotateY(0) scale(1)";
-  });
-});
-
-/* SNOW */
-const snow = document.querySelector('.snow');
-for(let i=0;i<50;i++){
-  let s=document.createElement("div");
-  s.className="snowflake";
-  s.innerHTML="❄";
-  s.style.left=Math.random()*100+"vw";
-  s.style.animationDuration=(Math.random()*5+3)+"s";
-  s.style.fontSize=(Math.random()*10+10)+"px";
-  snow.appendChild(s);
 }
 </script>
 
