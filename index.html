@@ -11,12 +11,22 @@ body {
   font-family: -apple-system, BlinkMacSystemFont;
   background: linear-gradient(135deg, #0f172a, #111827, #020617);
   color: #e5e7eb;
+  overflow-x: hidden;
+}
+
+/* PARTICLES */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
 }
 
 /* HEADER */
 .header {
   text-align: center;
   padding: 30px 20px 10px;
+  position: relative;
+  z-index: 1;
 }
 
 .avatar-wrapper {
@@ -52,6 +62,7 @@ body {
   justify-content: center;
   margin: 20px;
   gap: 10px;
+  z-index: 1;
 }
 
 .tab-btn {
@@ -68,7 +79,6 @@ body {
   border: none;
 }
 
-/* UNDERLINE */
 .underline {
   position: absolute;
   bottom: -5px;
@@ -84,7 +94,8 @@ body {
 .content-wrapper {
   position: relative;
   overflow: hidden;
-  min-height: 250px;
+  min-height: 300px;
+  z-index: 1;
 }
 
 .tab-content {
@@ -111,6 +122,7 @@ body {
 
 /* CARD */
 .card {
+  position: relative;
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(18px);
   border-radius: 18px;
@@ -118,11 +130,16 @@ body {
   border: 1px solid rgba(255,255,255,0.15);
   cursor: pointer;
   transition: 0.3s;
+  overflow: hidden;
 }
 
+/* NEON GLOW */
 .card:hover {
-  transform: translateY(-6px) scale(1.04);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+  transform: translateY(-6px) scale(1.05);
+  box-shadow:
+    0 0 10px #38bdf8,
+    0 0 20px #22c55e,
+    0 0 40px rgba(56,189,248,0.4);
 }
 
 .name {
@@ -162,62 +179,27 @@ body {
   margin-bottom: 5px;
 }
 
-/* CONTACT */
-.contact {
-  margin: 20px;
+/* RIPPLE */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  background: rgba(255,255,255,0.5);
+  animation: ripple 0.6s linear;
 }
 
-.contact-box {
-  background: rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 10px;
-  border: 1px solid rgba(255,255,255,0.15);
-}
-
-.contact-item {
-  padding: 12px;
-  cursor: pointer;
-}
-
-.contact-item:hover {
-  background: rgba(255,255,255,0.08);
-}
-
-/* MODAL */
-.modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0,0,0,0.7);
-}
-
-.modal.show {
-  display: flex;
-}
-
-.modal-content {
-  background: #0f172a;
-  padding: 25px;
-  border-radius: 14px;
-  width: 85%;
-  text-align: center;
-}
-
-.btn {
-  margin-top: 10px;
-  padding: 10px 15px;
-  border-radius: 10px;
-  border: none;
-  background: #3b82f6;
-  color: white;
-  cursor: pointer;
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
+
+<canvas id="particles"></canvas>
 
 <div class="header">
   <div class="avatar-wrapper">
@@ -227,33 +209,29 @@ body {
   <div class="sub">Premium Proxy Service</div>
 </div>
 
-<!-- TABS -->
 <div class="tabs">
-  <div class="tab-btn active" onclick="switchTab(event,'buy')">💸 BuyNow</div>
-  <div class="tab-btn" onclick="switchTab(event,'free')">🆓 Free</div>
+  <div class="tab-btn active">💸 BuyNow</div>
+  <div class="tab-btn">🆓 Free</div>
   <div id="underline" class="underline"></div>
 </div>
 
-<!-- CONTENT -->
-<div class="content-wrapper">
+<div class="content-wrapper" id="slider">
 
-  <!-- BUY -->
   <div id="buy" class="tab-content active">
     <div class="grid">
 
-      <div class="card" onclick="buy()">Proxy 1 Day<br><b>30VND</b></div>
-      <div class="card" onclick="buy()">Proxy 7 Days<br><b>70VND</b></div>
-      <div class="card" onclick="buy()">Proxy 30 Days<br><b>150VND</b></div>
-      <div class="card" onclick="buy()">Proxy VIP<br><b>200VND</b></div>
+      <div class="card ripple-btn" onclick="buy(event)">Proxy 1 Day<br><b>30VND</b></div>
+      <div class="card ripple-btn" onclick="buy(event)">Proxy 7 Days<br><b>70VND</b></div>
+      <div class="card ripple-btn" onclick="buy(event)">Proxy 30 Days<br><b>150VND</b></div>
+      <div class="card ripple-btn" onclick="buy(event)">Proxy VIP<br><b>200VND</b></div>
 
     </div>
   </div>
 
-  <!-- FREE -->
   <div id="free" class="tab-content">
     <div class="grid">
 
-      <div class="card free-card" onclick="openFree()">
+      <div class="card free-card ripple-btn" onclick="openFree(event)">
         <img src="pin.jpg" class="product-img">
         <div>
           <div class="free-badge">FREE</div>
@@ -267,66 +245,113 @@ body {
 
 </div>
 
-<!-- CONTACT -->
-<div class="contact">
-  <div class="contact-box">
-    <div class="contact-item" onclick="openZalo()">Zalo Support</div>
-  </div>
-</div>
-
-<div class="footer" style="text-align:center;color:#94a3b8;padding:20px;">
-  © Proxy UserMap
-</div>
-
-<!-- MODAL -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <h3>Proxy Pin Mod</h3>
-    <button class="btn" onclick="goDownload()">Tải ngay</button>
-    <br><br>
-    <button class="btn" onclick="closeModal()">Đóng</button>
-  </div>
-</div>
-
 <script>
-function switchTab(e, tab){
-  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+/* TAB SWIPE */
+let startX = 0;
+const slider = document.getElementById("slider");
 
-  document.getElementById(tab).classList.add('active');
-  e.target.classList.add('active');
+slider.addEventListener("touchstart", e => {
+  startX = e.touches[0].clientX;
+});
 
-  const underline = document.getElementById('underline');
-  underline.style.width = e.target.offsetWidth + "px";
-  underline.style.left = e.target.offsetLeft + "px";
+slider.addEventListener("touchend", e => {
+  let endX = e.changedTouches[0].clientX;
+  if (startX - endX > 50) switchTab(1);
+  if (endX - startX > 50) switchTab(0);
+});
+
+function switchTab(index){
+  const tabs = document.querySelectorAll(".tab-content");
+  const btns = document.querySelectorAll(".tab-btn");
+
+  tabs.forEach(t => t.classList.remove("active"));
+  btns.forEach(b => b.classList.remove("active"));
+
+  tabs[index].classList.add("active");
+  btns[index].classList.add("active");
+
+  moveUnderline(index);
 }
 
-window.onload = () => {
-  const active = document.querySelector('.tab-btn.active');
-  const underline = document.getElementById('underline');
-  underline.style.width = active.offsetWidth + "px";
-  underline.style.left = active.offsetLeft + "px";
-};
+document.querySelectorAll(".tab-btn")[0].onclick = ()=>switchTab(0);
+document.querySelectorAll(".tab-btn")[1].onclick = ()=>switchTab(1);
 
-function buy(){
+/* UNDERLINE */
+function moveUnderline(index){
+  const btns = document.querySelectorAll(".tab-btn");
+  const underline = document.getElementById("underline");
+  const btn = btns[index];
+
+  underline.style.width = btn.offsetWidth + "px";
+  underline.style.left = btn.offsetLeft + "px";
+}
+
+window.onload = ()=>moveUnderline(0);
+
+/* BUY */
+function buy(e){
+  rippleEffect(e);
   window.open("https://zalo.me/84989288257","_blank");
 }
 
-function openZalo(){
-  window.open("https://zalo.me/84989288257","_blank");
-}
-
-function openFree(){
-  document.getElementById("modal").classList.add("show");
-}
-
-function closeModal(){
-  document.getElementById("modal").classList.remove("show");
-}
-
-function goDownload(){
+function openFree(e){
+  rippleEffect(e);
   window.open("https://link4m.com/GyCC2","_blank");
 }
+
+/* RIPPLE EFFECT */
+function rippleEffect(e){
+  const btn = e.currentTarget;
+  const circle = document.createElement("span");
+  const rect = btn.getBoundingClientRect();
+
+  const size = Math.max(rect.width, rect.height);
+  circle.style.width = circle.style.height = size + "px";
+  circle.style.left = e.clientX - rect.left - size/2 + "px";
+  circle.style.top = e.clientY - rect.top - size/2 + "px";
+  circle.classList.add("ripple");
+
+  btn.appendChild(circle);
+  setTimeout(()=>circle.remove(),600);
+}
+
+/* PARTICLES */
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i=0;i<80;i++){
+  particles.push({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    r: Math.random()*2,
+    d: Math.random()*1
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  ctx.fillStyle = "rgba(255,255,255,0.6)";
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fill();
+
+    p.y += p.d;
+    if(p.y > canvas.height){
+      p.y = 0;
+      p.x = Math.random()*canvas.width;
+    }
+  });
+
+  requestAnimationFrame(draw);
+}
+draw();
 </script>
 
 </body>
