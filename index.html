@@ -3,34 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UserMap Proxy Shop</title>
 
-<link rel="stylesheet" href="style.css">
+<title>UserMap Shop</title>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <div class="container" id="auth">
-  <h2>Login</h2>
-  <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
+  <div class="box">
+    <h2>Login</h2>
 
-  <button onclick="register()">Register</button>
-  <button onclick="login()">Login</button>
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
 
-  <p id="status"></p>
+    <button onclick="register()">Register</button>
+    <button onclick="login()">Login</button>
+  </div>
 </div>
 
 <div class="container" id="app" style="display:none">
-  <h2>Proxy Shop</h2>
-  <p id="user"></p>
-  <p id="balance"></p>
+  <div class="box">
+    <h2>Proxy Shop</h2>
 
-  <div class="card" onclick="buy('1 Day',30)">Proxy 1 Day - 30</div>
-  <div class="card" onclick="buy('7 Days',70)">Proxy 7 Days - 70</div>
+    <p id="user"></p>
+    <p id="balance"></p>
 
-  <button onclick="logout()">Logout</button>
+    <div class="card" onclick="buy('1 Day',30)">
+      Proxy 1 Day - 30
+    </div>
+
+    <div class="card" onclick="buy('7 Days',70)">
+      Proxy 7 Days - 70
+    </div>
+
+  </div>
 </div>
 
 <script src="supabase.js"></script>
