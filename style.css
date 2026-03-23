@@ -11,23 +11,36 @@ body {
   text-align: center;
 }
 
-input, button {
+.box {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  padding: 20px;
+  border-radius: 16px;
+}
+
+input {
   width: 100%;
   padding: 10px;
-  margin: 5px 0;
+  margin: 6px 0;
   border-radius: 8px;
   border: none;
 }
 
 button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 8px;
   background: #3b82f6;
   color: white;
+  font-weight: bold;
 }
 
 .card {
   background: rgba(255,255,255,0.08);
-  padding: 15px;
-  margin: 10px;
-  border-radius: 12px;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 10px;
   cursor: pointer;
 }
