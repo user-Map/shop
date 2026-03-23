@@ -9,7 +9,7 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont;
-  background: radial-gradient(circle at top, #0f172a, #020617);
+  background: radial-gradient(circle at top, #020617, #020617 40%, #000);
   color: white;
   overflow-x: hidden;
 }
@@ -25,7 +25,7 @@ body {
 .snowflake {
   position: absolute;
   top: -10px;
-  opacity: 0.7;
+  opacity: 0.6;
   animation: fall linear infinite;
 }
 
@@ -36,33 +36,34 @@ body {
 /* HEADER */
 .header {
   text-align: center;
-  padding: 30px 20px;
-  transform: translateZ(0);
+  padding: 35px 20px;
+  transform: translateY(0);
+  transition: 0.3s;
 }
 
 .avatar-wrapper {
-  width: 100px;
-  height: 100px;
-  margin: 0 auto 12px;
-  padding: 3px;
+  width: 110px;
+  height: 110px;
+  margin: auto;
+  padding: 4px;
   border-radius: 50%;
-  background: linear-gradient(45deg, #3b82f6, #22c55e, #a855f7);
+  background: conic-gradient(#3b82f6, #22c55e, #a855f7, #3b82f6);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 30px rgba(59,130,246,0.5);
+  box-shadow: 0 0 40px rgba(59,130,246,0.6);
 }
 
 .avatar {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  object-fit: cover;
 }
 
 .title {
-  font-size: 26px;
-  font-weight: 700;
+  font-size: 28px;
+  font-weight: 800;
+  margin-top: 10px;
   letter-spacing: 0.5px;
 }
 
@@ -81,84 +82,59 @@ body {
 
 .section-title {
   text-align: center;
-  margin: 10px 0;
+  margin: 15px 0;
   font-weight: bold;
   color: #60a5fa;
 }
 
 /* CARD */
 .card {
-  background: rgba(255,255,255,0.06);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(20px);
   border-radius: 18px;
   padding: 20px;
-  transition: 0.25s ease;
-  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.08);
   position: relative;
   overflow: hidden;
-  transform-style: preserve-3d;
+  cursor: pointer;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
+/* glow */
 .card::before {
   content: "";
   position: absolute;
-  inset: -50%;
-  background: radial-gradient(circle, rgba(59,130,246,0.15), transparent 60%);
-  animation: glowMove 10s linear infinite;
+  inset: -60%;
+  background: radial-gradient(circle, rgba(59,130,246,0.2), transparent 60%);
+  animation: rotateGlow 12s linear infinite;
 }
 
-@keyframes glowMove {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@keyframes rotateGlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* HOVER TILT */
 .card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.7);
 }
 
-.card:active {
-  transform: scale(0.97);
+/* tilt effect */
+.card-inner {
+  position: relative;
+  z-index: 2;
 }
 
+/* TEXT */
 .name {
   font-size: 18px;
   font-weight: 600;
 }
 
 .price {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: bold;
   color: #60a5fa;
   margin: 10px 0;
-}
-
-.features {
-  font-size: 13px;
-  color: #cbd5f5;
-}
-
-.features div {
-  margin: 5px 0;
-}
-
-/* BUTTON */
-.btn {
-  margin-top: 12px;
-  width: 100%;
-  padding: 12px;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(45deg, #3b82f6, #2563eb);
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.btn:active {
-  transform: scale(0.95);
 }
 
 /* FREE */
@@ -172,24 +148,42 @@ body {
   top: -10px;
   right: 15px;
   background: linear-gradient(45deg, #22c55e, #16a34a);
-  padding: 4px 10px;
+  padding: 5px 12px;
   font-size: 11px;
   border-radius: 8px;
   font-weight: bold;
 }
 
-/* DETAIL PANEL (slide up) */
+/* BUTTON */
+.btn {
+  margin-top: 12px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(45deg, #3b82f6, #2563eb);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* DETAIL PANEL */
 .detail {
   position: fixed;
-  bottom: -100%;
+  bottom: -120%;
   left: 0;
   width: 100%;
-  background: rgba(15,23,42,0.98);
-  backdrop-filter: blur(20px);
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  padding: 20px;
-  transition: 0.35s ease;
+  background: rgba(2,6,23,0.95);
+  backdrop-filter: blur(25px);
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
+  padding: 25px;
+  transition: 0.4s cubic-bezier(.2,.8,.2,1);
   z-index: 99999;
 }
 
@@ -197,23 +191,15 @@ body {
   bottom: 0;
 }
 
-.detail h3 {
-  margin-top: 0;
-}
-
-.close-btn {
-  margin-top: 10px;
-  background: #ef4444;
-}
-
 /* MODAL */
 .modal {
-  display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.75);
+  display: none;
   justify-content: center;
   align-items: center;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
   z-index: 99999;
 }
 
@@ -227,13 +213,23 @@ body {
   border-radius: 16px;
   width: 85%;
   text-align: center;
-  border: 1px solid rgba(255,255,255,0.15);
-  animation: pop 0.25s ease;
+  border: 1px solid rgba(255,255,255,0.1);
 }
 
-@keyframes pop {
-  from { transform: scale(0.8); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+/* LOADING */
+.loader {
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top: 3px solid #3b82f6;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  animation: spin 0.8s linear infinite;
+  margin: auto;
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* CONTACT */
@@ -242,7 +238,7 @@ body {
 }
 
 .contact-box {
-  background: rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.05);
   backdrop-filter: blur(15px);
   border-radius: 15px;
   padding: 10px;
@@ -258,13 +254,7 @@ body {
 }
 
 .contact-item:hover {
-  background: rgba(255,255,255,0.1);
-}
-
-.contact-item img {
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
+  background: rgba(255,255,255,0.08);
 }
 
 .footer {
@@ -285,57 +275,60 @@ body {
     <img src="K.PNG" class="avatar">
   </div>
   <div class="title">Proxy UserMap</div>
-  <div class="sub">Chọn gói phù hợp với bạn</div>
+  <div class="sub">Premium Proxy Service</div>
 </div>
 
 <div class="packages">
 
 <div class="section-title">BUY NOW</div>
 
-<div class="card" onclick="openDetail('1 Day','30VND','Dùng 24h - tốc độ cao')">
-  <div class="name">Proxy Premium 1 Ngày</div>
-  <div class="price">30VND</div>
-  <div class="features">
-    <div>✔ Dùng 24h</div>
-    <div>✔ Tốc độ cao</div>
+<div class="card tilt" onclick="openDetail('1 Day','30VND','Dùng 24h - tốc độ cao')">
+  <div class="card-inner">
+    <div class="name">Proxy 1 Day</div>
+    <div class="price">30VND</div>
   </div>
 </div>
 
-<div class="card" onclick="openDetail('7 Days','70VND','Ổn định cao')">
-  <div class="name">Proxy Premium 7 Ngày</div>
-  <div class="price">70VND</div>
+<div class="card tilt" onclick="openDetail('7 Days','70VND','Ổn định cao')">
+  <div class="card-inner">
+    <div class="name">Proxy 7 Days</div>
+    <div class="price">70VND</div>
+  </div>
 </div>
 
-<div class="card" onclick="openDetail('30 Days','150VND','Full support + DragAim')">
-  <div class="name">Proxy Premium 30 Ngày</div>
-  <div class="price">150VND</div>
+<div class="card tilt" onclick="openDetail('30 Days','150VND','Full support')">
+  <div class="card-inner">
+    <div class="name">Proxy 30 Days</div>
+    <div class="price">150VND</div>
+  </div>
 </div>
 
 <div class="section-title">FREE</div>
 
-<div class="card free-card" onclick="openFree()">
+<div class="card free-card tilt" onclick="openFree()">
   <div class="free-badge">FREE</div>
-  <div class="name">Proxy Pin Mod</div>
-  <div class="price">0 VND</div>
+  <div class="card-inner">
+    <div class="name">Proxy Pin Mod</div>
+    <div class="price">0 VND</div>
+  </div>
 </div>
 
 </div>
 
-<!-- DETAIL PANEL -->
+<!-- DETAIL -->
 <div id="detail" class="detail">
-  <h3 id="dTitle"></h3>
+  <h2 id="dTitle"></h2>
   <p id="dDesc"></p>
   <button class="btn" onclick="buy()">Mua ngay</button>
-  <button class="btn close-btn" onclick="closeDetail()">Đóng</button>
+  <button class="btn" onclick="closeDetail()">Đóng</button>
 </div>
 
-<!-- MODAL FREE -->
+<!-- MODAL -->
 <div id="modal" class="modal">
   <div class="modal-content">
-    <h3>Proxy Pin Mod</h3>
-    <p>Bấm để tải file</p>
+    <h3>Đang chuẩn bị tải...</h3>
+    <div class="loader" id="loader"></div>
     <button class="btn" onclick="goDownload()">Tải ngay</button>
-    <br><br>
     <button class="btn" onclick="closeModal()">Đóng</button>
   </div>
 </div>
@@ -343,37 +336,36 @@ body {
 <div class="contact">
   <div class="contact-box">
     <div class="contact-item" onclick="openZalo()">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg">
-      <div>Zalo Chat</div>
+      <div>Zalo Support</div>
     </div>
   </div>
 </div>
 
-<div class="footer">⚠️ IB để được hỗ trợ nhanh</div>
+<div class="footer">© Proxy UserMap</div>
 
 <script>
-function buy(){
-  window.open("https://zalo.me/84989288257","_blank");
-}
-
-function openZalo(){
-  window.open("https://zalo.me/84989288257","_blank");
-}
-
 /* DETAIL */
-function openDetail(title, price, desc){
+function openDetail(t,p,d){
   document.getElementById("detail").classList.add("show");
-  document.getElementById("dTitle").innerText = title + " - " + price;
-  document.getElementById("dDesc").innerText = desc;
+  document.getElementById("dTitle").innerText = t + " - " + p;
+  document.getElementById("dDesc").innerText = d;
 }
 
 function closeDetail(){
   document.getElementById("detail").classList.remove("show");
 }
 
-/* FREE MODAL */
+/* BUY */
+function buy(){
+  window.open("https://zalo.me/84989288257","_blank");
+}
+
+/* FREE */
 function openFree(){
   document.getElementById("modal").classList.add("show");
+  let loader = document.getElementById("loader");
+  loader.style.display = "block";
+  setTimeout(()=> loader.style.display="none", 1200);
 }
 
 function closeModal(){
@@ -384,16 +376,40 @@ function goDownload(){
   window.open("https://link4m.com/GyCC2","_blank");
 }
 
+function openZalo(){
+  window.open("https://zalo.me/84989288257","_blank");
+}
+
+/* TILT EFFECT */
+document.querySelectorAll(".tilt").forEach(card=>{
+  card.addEventListener("mousemove",(e)=>{
+    let rect = card.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+
+    let cx = rect.width/2;
+    let cy = rect.height/2;
+
+    let dx = (x - cx)/20;
+    let dy = (y - cy)/20;
+
+    card.style.transform = `rotateX(${-dy}deg) rotateY(${dx}deg) scale(1.03)`;
+  });
+
+  card.addEventListener("mouseleave",()=>{
+    card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+  });
+});
+
 /* SNOW */
 const snow = document.querySelector('.snow');
-
-for(let i=0;i<60;i++){
-  let s = document.createElement('div');
-  s.className = 'snowflake';
-  s.innerHTML = "❄";
-  s.style.left = Math.random()*100+"vw";
-  s.style.animationDuration = (Math.random()*4+3)+"s";
-  s.style.fontSize = (Math.random()*10+10)+"px";
+for(let i=0;i<50;i++){
+  let s=document.createElement("div");
+  s.className="snowflake";
+  s.innerHTML="❄";
+  s.style.left=Math.random()*100+"vw";
+  s.style.animationDuration=(Math.random()*5+3)+"s";
+  s.style.fontSize=(Math.random()*10+10)+"px";
   snow.appendChild(s);
 }
 </script>
