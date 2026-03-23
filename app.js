@@ -1,41 +1,44 @@
 let currentUser = null;
 
-/* LOGIN */
 async function login(){
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = emailInput().value;
+  const password = passInput().value;
 
   const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email,
-    password
+    email, password
   });
 
   if(error){
     alert(error.message);
-  } else {
-    currentUser = data.user;
-    showApp();
+    return;
   }
+
+  currentUser = data.user;
+  showApp();
 }
 
-/* REGISTER */
 async function register(){
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
+  const email = emailInput().value;
+  const password = passInput().value;
 
   const { error } = await supabaseClient.auth.signUp({
-    email,
-    password
+    email, password
   });
 
   if(error){
     alert(error.message);
   } else {
-    alert("Register success");
+    alert("Registered!");
   }
 }
 
-/* SHOW APP */
+function emailInput(){
+  return document.getElementById("email");
+}
+function passInput(){
+  return document.getElementById("password");
+}
+
 async function showApp(){
   document.getElementById("auth").style.display = "none";
   document.getElementById("app").style.display = "block";
@@ -45,21 +48,27 @@ async function showApp(){
   loadBalance();
 }
 
-/* LOAD BALANCE */
 async function loadBalance(){
-  const { data } = await supabaseClient
+  let { data } = await supabaseClient
     .from("profiles")
     .select("*")
     .eq("id", currentUser.id)
     .single();
 
-  document.getElementById("balance").innerText =
-    "Balance: " + (data?.balance || 0);
+  if(!data){
+    await supabaseClient.from("profiles").insert({
+      id: currentUser.id,
+      email: currentUser.email,
+      balance: 0
+    });
+    data = { balance: 0 };
+  }
+
+  document.getElementById("balance").innerText = "Balance: " + data.balance;
 }
 
-/* BUY */
-async function buy(name, price){
-  const { data } = await supabaseClient
+async function buy(price, name){
+  let { data } = await supabaseClient
     .from("profiles")
     .select("*")
     .eq("id", currentUser.id)
@@ -75,11 +84,21 @@ async function buy(name, price){
     .update({ balance: data.balance - price })
     .eq("id", currentUser.id);
 
-  alert("Mua thành công!");
+  alert("Mua " + name + " thành công!");
   loadBalance();
 }
 
-/* AUTO SESSION */
+function showTab(tab){
+  document.getElementById("buy").style.display = tab === "buy" ? "block" : "none";
+  document.getElementById("free").style.display = tab === "free" ? "block" : "none";
+}
+
+function logout(){
+  supabaseClient.auth.signOut();
+  location.reload();
+}
+
+/* auto session */
 supabaseClient.auth.getSession().then(({ data }) => {
   if(data.session){
     currentUser = data.session.user;
